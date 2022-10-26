@@ -1,7 +1,9 @@
-var SystemTools = (function () {
+/// <reference path="poupitems/poupitems.ts" />
+/// <reference path="poupitems/poupitems.ts" />
+var SystemTools = /** @class */ (function () {
     function SystemTools() {
         this.orgCondition = "";
-        this.SysSession = GetSystemSession();
+        this.SysSession = GetSystemSession('Home');
     }
     SystemTools.prototype.apiUrl = function (controller, action) {
         var apiUrl = $("#GetAPIUrl").val() + controller + "/" + action;
@@ -71,7 +73,7 @@ var SystemTools = (function () {
         }
         var favs = SharedWork.UserFavorits.filter(function (f) { return f.MODULE_CODE == sessionStorage.getItem("MODU_CODE"); });
         var favImage = DocumentActions.GetElementById("favImage");
-        if (favs.length > 0) {
+        if (favs.length > 0) { // This page is in favorite list
             //sessionStorage.setItem("imgFavUrl", "../images/favourit.gif");
             //$("#imgFavUrl").val("../images/favourit.gif");
             favImage.src = "../images/favourit.gif";
@@ -164,62 +166,6 @@ var SystemTools = (function () {
             }
         });
     };
-    //old code
-    //public FindNotification(moduleCode: string, _SearchControlName: string, Condition: string, OnSearchSelected: () => void) {
-    //    this.orgCondition = Condition;
-    //    Ajax.CallAsync({
-    //        url: Url.Action("Find", "ClientTools"),
-    //        data: {
-    //            moduleCode: moduleCode,
-    //            Condition: Condition,
-    //            controlName: _SearchControlName//$("#SearchControlName").val()
-    //        },
-    //        async: true,
-    //        success: (resp) => {
-    //            var response = resp.result;
-    //            if (response == null) {
-    //                MessageBox.Show("Search not available, Please call your app administrator", "Search");
-    //                return;
-    //            }
-    //            let columns = response.Columns as Array<datatableColumn>;
-    //            let result = JSON.parse(response.DataResult);
-    //            let settings = response.Settings as G_SearchForm;
-    //            let TableName = response.TableName as string;
-    //            let Condition = response.Condition as string;
-    //            SearchGrid.SearchDataGrid = new DataTable();
-    //            SearchGrid.SearchDataGrid.Columns = columns;
-    //            SearchGrid.SearchDataGrid.dataScr = result;
-    //            SearchGrid.SearchDataGrid.ElementName = "SearchDataTable";
-    //            SearchGrid.SearchDataGrid.PageSize = settings.PageSize;// < 50 ? 50 : settings.PageSize;
-    //            SearchGrid.SearchDataGrid.PrimaryKey = settings.ReturnDataPropertyName; //"RowIndex";
-    //            let boxWidth: string = settings.Width <= 100 ? "70%" : settings.Width.toString() + "px";
-    //            let boxHeight: string = settings.Height <= 100 ? "50%" : settings.Height.toString() + "px";
-    //            let boxLeft: string = settings.Left <= 50 ? "14%" : settings.Left.toString() + "px";
-    //            let boxTop: string = settings.Top <= 50 ? "10%" : settings.Top.toString() + "px";
-    //            $("#SearchBox").css("width", boxWidth);
-    //            $("#SearchBox").css("height", boxHeight);
-    //            $("#SearchBox").css("left", boxLeft);
-    //            $("#SearchBox").css("top", boxTop);
-    //            SearchGrid.SearchDataGrid.Bind();
-    //            try {
-    //                if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
-    //                    document.getElementById("searchTitle").innerText = settings.SerachFormTitleA;
-    //                }
-    //                else if (SysSession.CurrentEnvironment.ScreenLanguage == "en") {
-    //                    document.getElementById("searchTitle").innerText = settings.SerachFormTitle;
-    //                }
-    //            } catch (e) {
-    //                console.log('error in language...');
-    //            }
-    //            $(".ui-igedit-input").keyup((e) => {
-    //            });
-    //            $("#SearchBox").modal("show");//.css("display", "");//
-    //            $("#SearchDataTable").css("width", "100%");
-    //            $("#SearchDataTable").css("height", "100%");
-    //        }
-    //    });
-    //}
-    //new code//
     SystemTools.prototype.FindNotification = function (moduleCode, _SearchControlName, Condition, OnSearchSelected) {
         var _this = this;
         this.orgCondition = Condition;
@@ -462,7 +408,7 @@ var SystemTools = (function () {
     };
     return SystemTools;
 }());
-var SelectItem = (function () {
+var SelectItem = /** @class */ (function () {
     function SelectItem() {
         this.Value = null;
         this.Text = null;

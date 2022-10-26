@@ -2,9 +2,9 @@
 using System;
 using System.Text;
 using System.Security.Cryptography;
+using Inv.DAL.Domain;
 
-
-namespace RS.WebUI.Reports.Models
+namespace Inv.WebUI.Reports.Models
 {
     public static class UserTools
     {

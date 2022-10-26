@@ -1,6 +1,0 @@
-$(function(){
-
-var da=new Date();
-
-
-})

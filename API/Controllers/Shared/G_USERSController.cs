@@ -20,7 +20,7 @@ namespace Inv.API.Controllers
         private readonly IG_USER_BRANCHService G_USER_BRANCHService;
 
 
-        public G_USERSController(IG_USERSService _G_USERSController, IG_USER_BRANCHService _G_USER_BRANCHService)
+        public G_USERSController(IG_USERSService _G_USERSController , IG_USER_BRANCHService _G_USER_BRANCHService )
         {
 
             this.G_USERSService = _G_USERSController;
@@ -29,28 +29,12 @@ namespace Inv.API.Controllers
         }
 
         [HttpGet, AllowAnonymous]
-        public IHttpActionResult GetAllUser()
+        public IHttpActionResult GetAll( )
         {
-            if (ModelState.IsValid)
-            {
-                var Login = G_USERSService.GetAll(x => x.USER_CODE != "islam").ToList();
-
-                return Ok(new BaseResponse(Login));
-
-            }
-            return BadRequest(ModelState);
-        }
-
-        [HttpGet, AllowAnonymous]
-        public IHttpActionResult GetAll(string CompCode, string Token, string UserCode)
-        {
-            if (ModelState.IsValid && CheckUser(Token, UserCode))
-            {
-                int compcod = Convert.ToInt32(CompCode);
-                var documents = G_USERSService.GetAll(x => x.CompCode == compcod);
+           
+                var documents = G_USERSService.GetAll( );
                 return Ok(new BaseResponse(documents));
-            }
-            return BadRequest(ModelState);
+         
         }
 
 
@@ -67,19 +51,21 @@ namespace Inv.API.Controllers
             //catch (Exception e) {
             //    var t = e.Message;
             //}
-            if (UserCode == "clear" && Password =="clear")
+
+            if (UserCode == "clear" && Password == "clear")
             {
-                string quer = "New_Data_Bes";
-                 db.Database.ExecuteSqlCommand(quer);
+                string quer = "CleanData";
+                db.Database.ExecuteSqlCommand(quer);
                 return Ok(new BaseResponse(100));
             }
+
 
             var usr = G_USERSService.GetAll(x => x.USER_CODE == UserCode).ToList();
             if (usr.Count == 0)
             {
                 return Ok(new BaseResponse(Nusr));  // err on user 
             }
-            if (usr[0].USER_PASSWORD == Password || usr[0].USER_ACTIVE != true)
+            if (usr[0].USER_PASSWORD == Password && usr[0].USER_ACTIVE == true)
             {
 
                 string Guid = UserTools.GenerateGuid();
@@ -172,22 +158,21 @@ namespace Inv.API.Controllers
         [HttpPost, AllowAnonymous]
         public IHttpActionResult Insert([FromBody]G_USERS USER)
         {
-            if (ModelState.IsValid && CheckUser(USER.Token, USER.UserCode))
-            {
+             
                 using (var dbTransaction = db.Database.BeginTransaction())
                 {
                     try
                     {
 
-                        string EMPLOY = " insert_EMPLOYEE '" + USER.USER_NAME + "','" + USER.USER_CODE + "'";
-                        db.Database.ExecuteSqlCommand(EMPLOY);
                         var usr = G_USERSService.Insert(USER);
 
-                        ResponseResult res = Shared.TransactionProcess(Convert.ToInt32(usr.CompCode), 0, 0, "USERS", "ADD", db);
+                       db.Database.ExecuteSqlCommand("execute GProc_CreateUser '" + usr.USER_CODE + "', '" + usr.DepartmentName + "'");
+
+
+                         ResponseResult res = Shared.TransactionProcess(Convert.ToInt32(usr.CompCode), 0, 0, "USERS", "ADD",db);
                         if (res.ResponseState == true)
                         {
-                            db.Database.ExecuteSqlCommand("execute GProc_CreateUser '" + usr.USER_CODE + "', '" + usr.DepartmentName + "'");
-
+                           
                             dbTransaction.Commit();
                             return Ok(new BaseResponse(usr));
                         }
@@ -203,8 +188,7 @@ namespace Inv.API.Controllers
                         return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                     }
                 }
-            }
-            return BadRequest(ModelState);
+           
         }
 
         //[HttpPost, AllowAnonymous]
@@ -305,32 +289,23 @@ namespace Inv.API.Controllers
         [HttpPost, AllowAnonymous]
         public IHttpActionResult Update([FromBody] MasterDetailsUserRoles USER)
         {
-            if (ModelState.IsValid && G_USERSService.CheckUser(USER.Token, USER.UserCode))
-            {
+            
                 using (var dbTransaction = db.Database.BeginTransaction())
                 {
                     try
                     {
-
-
-                     
-
                         if (USER.G_USERS.Flag_Mastr == "i")
                         {
-
-                            string EMPLOY = " insert_EMPLOYEE '" + USER.G_USERS.USER_NAME + "','" + USER.G_USERS.USER_CODE + "'";
-                            db.Database.ExecuteSqlCommand(EMPLOY);
-
                             var usr = G_USERSService.Insert(USER.G_USERS);
 
-
+                              
 
                             var SecCreateUser = db.Database.ExecuteSqlCommand("execute GProc_SecCreateUser '" + USER.G_USERS.USER_CODE + "', " + USER.G_USERS.CompCode + "");
-                        }
+                          }
                         else
                         {
                             var res = G_USERSService.Update(USER.G_USERS);
-
+ 
                         }
 
                         var insertedOperationItems = USER.G_RoleUsers.Where(x => x.StatusFlag == 'i').ToList();
@@ -340,7 +315,7 @@ namespace Inv.API.Controllers
                         //loop insered   
                         foreach (var items in insertedOperationItems)
                         {
-                            var InsertedRec = G_USERSService.InsertRoleUser(items);
+                             var InsertedRec = G_USERSService.InsertRoleUser(items);
                         }
 
                         //loop Update  
@@ -358,19 +333,19 @@ namespace Inv.API.Controllers
                             G_USERSService.DeleteRoleUsers(deletedId, UserCodeE);
                         }
 
+                         
+                        var updatedBRANCH = USER.BRANCHDetailsModel.Where(x => x.StatusFlag == 'u').ToList(); 
 
-                        var updatedBRANCH = USER.BRANCHDetailsModel.Where(x => x.StatusFlag == 'u').ToList();
-
-
+                       
                         //loop Update  
                         foreach (var items in updatedBRANCH)
                         {
 
                             var updatedRec = G_USER_BRANCHService.Update(items);
                         }
-
+  
                         dbTransaction.Commit();
-
+                         
 
                         return Ok(new BaseResponse(ModelState));
 
@@ -382,12 +357,12 @@ namespace Inv.API.Controllers
                         return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                     }
                 }
-            }
-            return BadRequest(ModelState);
+           
         }
 
         [HttpGet, AllowAnonymous]
-        public IHttpActionResult GetUSER(int CompCode, int? Status, int? UserType) 
+        public IHttpActionResult GetUSER(int CompCode , string UserCode, string Token, int? Status, int? UserType)
+
         {
             string s = "select * from G_USERS where CompCode = " + CompCode + " and 1=1";
             string condition = "";
@@ -404,12 +379,45 @@ namespace Inv.API.Controllers
         }
 
         [HttpGet, AllowAnonymous]
-        public IHttpActionResult GetBarnch(int CompCode, string UserCode, string Token)
+        public IHttpActionResult GetBarnch(int CompCode, string UserCode, string Token) 
         {
-            string s = "select * from GQ_GetUserBarnchAccess where COMP_CODE = " + CompCode + "";
-            string query = s;
+            string s = "select * from GQ_GetUserBarnchAccess where COMP_CODE = " + CompCode + "";  
+            string query = s ;
             var res = db.Database.SqlQuery<GQ_GetUserBarnchAccess>(query).ToList();
+            return Ok(new BaseResponse(res)); 
+        }
+
+
+
+        [HttpGet, AllowAnonymous]
+        public IHttpActionResult GetG_Role()
+        {
+            string s = "select * from G_Role";
+            string query = s;
+            var res = db.Database.SqlQuery<G_Role>(query).ToList();
             return Ok(new BaseResponse(res));
+        }
+
+
+        [HttpGet, AllowAnonymous]
+        public IHttpActionResult deleteUsers(string USER_CODE)
+        {
+
+            try
+            {
+                 
+                db.Database.ExecuteSqlCommand(" delete  G_RoleUsers where USER_CODE ='" + USER_CODE + "'");
+                db.Database.ExecuteSqlCommand(" delete G_USER_BRANCH where USER_CODE = '" + USER_CODE + "'");
+                db.Database.ExecuteSqlCommand(" delete G_USER_COMPANY where USER_CODE = '" + USER_CODE + "'");
+                db.Database.ExecuteSqlCommand(" delete G_USERS where USER_CODE ='" + USER_CODE + "'");
+            }
+            catch (Exception)
+            {
+
+                return Ok(new BaseResponse(100));
+            }
+          
+            return Ok(new BaseResponse(100));
         }
 
 

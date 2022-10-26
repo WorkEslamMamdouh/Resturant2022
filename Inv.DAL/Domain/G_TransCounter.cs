@@ -17,7 +17,9 @@ namespace Inv.DAL.Domain
         public int CompCode { get; set; }
         public int BranchCode { get; set; }
         public string SystemCode { get; set; }
+        public int FinYear { get; set; }
         public string TransType { get; set; }
+        public int PeriodCode { get; set; }
         public Nullable<int> LastSerial { get; set; }
     }
 }

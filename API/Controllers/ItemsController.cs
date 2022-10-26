@@ -1,5 +1,6 @@
-﻿using API.Models;
-using Inv.BLL.Services.Item;
+﻿using Inv.API.Models;
+using Inv.API.Tools;
+using Inv.BLL.Services.IItems;
 using Inv.DAL.Domain;
 using System;
 using System.Collections.Generic;
@@ -7,268 +8,136 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using API.Controllers;
-using Inv.API.Tools;
-using System.Web.Http.Cors;
+using Inv.API.Controllers;
 using System.Data.SqlClient;
-using System.Data.Entity;
-using Inv.DAL.Repository;
-using Newtonsoft.Json;
-using Inv.API.Models;
+using Inv.API.Models.CustomModel;
+using Newtonsoft.Json;  
+using System.Data; 
 
 namespace Inv.API.Controllers
 {
-    [EnableCorsAttribute("*", "*", "*")]
     public class ItemsController : BaseController
     {
+        private readonly ItemsService ItemsService;
+        private readonly G_USERSController UserControl;
 
-        private readonly IItemServices ItemServices;
-
-        public ItemsController(IItemServices _IItemServices)
+        public ItemsController(ItemsService _IItemsService, G_USERSController _Control)
         {
-            ItemServices = _IItemServices;
-
-        }
+            this.ItemsService = _IItemsService;
+            this.UserControl = _Control;
+        } 
 
         [HttpGet, AllowAnonymous]
-        public IHttpActionResult GetAll(int CompCode)
-        {
-            if (ModelState.IsValid)
-            {
-                var Items = ItemServices.GetAll().ToList();
-
-                return Ok(new BaseResponse(Items));
-
-            }
-            return BadRequest(ModelState);
-        }
-
+        public IHttpActionResult GetAllCategory(int CompCode)
+        { 
+            var res = db.Database.SqlQuery<I_D_Category>("select * from I_D_Category where CompCode = " + CompCode + "").ToList(); 
+            return Ok(new BaseResponse(res));
+        } 
         [HttpGet, AllowAnonymous]
-        public IHttpActionResult GetAll_Item_by_Cat(int Cat)
-        {
-            if (ModelState.IsValid)
-            {
-                var Item = ItemServices.GetAll(x => x.ID_CAT == Cat).ToList();
-
-                return Ok(new BaseResponse(Item));
-
-            }
-            return BadRequest(ModelState);
-        }
-
-        [HttpGet, AllowAnonymous]
-        public IHttpActionResult Getbyserial(string Serial)
-        {
-            if (ModelState.IsValid)
-            {
-                var Item = ItemServices.GetAll(x => x.serial == Serial).ToList();
-                //var Item = db.Database.ExecuteSqlCommand("select PRODUCT_NAME , PRODUCT_QET from PRODUCT where serial =" +Serial+"");
-
-                return Ok(new BaseResponse(Item));
-
-            }
-            return BadRequest(ModelState);
-        }
-
-
-
-        [HttpPost, AllowAnonymous]
-        public IHttpActionResult UpdateQTy([FromBody]PRODUCT PRODUCTAll)
-        {
-            if (ModelState.IsValid)
-            {
-                //var Item = db.Database.ExecuteSqlCommand("UPDATE PRODUCT SET PRODUCT_QET ="+Qty+" where serial = "+Serial+"");
-
-                var updated = ItemServices.Update(PRODUCTAll);
-                return Ok(new BaseResponse(100));
-
-            }
-            return BadRequest(ModelState);
-        }
-
-
-        
-
-        public string ExecuteScalar(string SqlStatement)
-        {
-            string connectionString = db.Database.Connection.ConnectionString;
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                using (SqlCommand command = new SqlCommand())
-                {
-                    command.Connection = connection;
-                    command.CommandText = SqlStatement;
-                    connection.Open();
-
-                    string result = string.Empty;
-
-                    result = command.ExecuteScalar().ToString();
-                    connection.Close();
-                    command.Dispose();
-                    connection.Dispose();
-
-
-                    return result;
-                }
-            }
-
-        }
-
-
-
-
-        [HttpPost, AllowAnonymous]
-        public IHttpActionResult Insert([FromBody]PRODUCT Nation)
-        {
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    var Nationality = ItemServices.Insert(Nation);
-                    return Ok(new BaseResponse(Nationality));
-                }
-                catch (Exception ex)
-                {
-                    return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
-                }
-            }
-            return BadRequest(ModelState);
+        public IHttpActionResult GetAllItemFamily(int CompCode)
+        { 
+            var res = db.Database.SqlQuery<I_ItemFamily>("select * from I_ItemFamily where CompCode = " + CompCode + "").ToList();
+            return Ok(new BaseResponse(res));
         }
         [HttpGet, AllowAnonymous]
-        public IHttpActionResult Delete(int ID)
+        public IHttpActionResult GetAllItem(int CompCode)
         {
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    ItemServices.Delete(ID);
-                    return Ok(new BaseResponse());
-                }
-                catch (Exception)
-                {
-                    return Ok(new BaseResponse(0, "Error"));
-                }
-
-            }
-            else
-            {
-                return BadRequest(ModelState);
-            }
+            var res = db.Database.SqlQuery<IQ_GetItemStoreInfo>("select * from IQ_GetItemStoreInfo where CompCode = " + CompCode + "").ToList();
+            return Ok(new BaseResponse(res));
         }
-        [HttpPost, AllowAnonymous]
-        public IHttpActionResult Update([FromBody]PRODUCT Nation)
-        {
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    var Nationality = ItemServices.Update(Nation);
-                    return Ok(new BaseResponse(Nationality));
-                }
-                catch (Exception ex)
-                {
-                    return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
-                }
-            }
-            return BadRequest(ModelState);
-        }
-
-
-
-        //***************asmaa********************//
         [HttpGet, AllowAnonymous]
-        public IHttpActionResult UpdateLst(List<PRODUCT> PRODUCT)
+        public IHttpActionResult UpdateCategory(string data)
         {
+            List<I_D_Category> Categorylist = JsonConvert.DeserializeObject<List<I_D_Category>>(data);
 
-            try
+
+            var insertedInvoiceItems = Categorylist.Where(x => x.StatusFlag == 'i').ToList();
+            var updatedInvoiceItems = Categorylist.Where(x => x.StatusFlag == 'u').ToList();
+            var deletedInvoiceItems = Categorylist.Where(x => x.StatusFlag == 'd').ToList(); 
+
+            foreach (var item in insertedInvoiceItems)
             {
-                var InsertOperationItems = PRODUCT.Where(x => x.StatusFlag == 'i').ToList();
-                var updatedOperationItems = PRODUCT.Where(x => x.StatusFlag == 'u').ToList();
-                var deletedOperationItems = PRODUCT.Where(x => x.StatusFlag == 'd').ToList();
-
-
-                //loop Insert  I_Pur_TR_ReceiveItems
-                foreach (var item in InsertOperationItems)
-                {
-
-
-                    var Insert = ItemServices.Insert(item);
-
-                }
-
-                //loop Update  I_Pur_TR_ReceiveItems
-                foreach (var item in updatedOperationItems)
-                {
-
-                    var updated = ItemServices.Update(item);
-
-                }
-
-                //loop Delete  I_Pur_TR_ReceiveItems
-                foreach (var item in deletedOperationItems)
-                {
-                    int id = item.PRODUCT_ID;
-                    ItemServices.Delete(id);
-
-                }
-
-
-                return Ok(new BaseResponse("ok"));
+                ItemsService.InsertCategory(item);
             }
-            catch (Exception)
+            foreach (var item in updatedInvoiceItems)
             {
-                return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, "الصنف مستخدم بافعل لا يمكنك تغيره"));
+                ItemsService.UpdateCategory(item);
             }
+            foreach (var item in deletedInvoiceItems)
+            {
+                ItemsService.DeleteCategory(item.CatID);
+            }
+ 
 
+            return Ok(new BaseResponse(11));
+        }
+        [HttpGet, AllowAnonymous]
+        public IHttpActionResult UpdateItemFamily(string data)
+        {
+            List<I_ItemFamily> ItemFamilylist = JsonConvert.DeserializeObject<List<I_ItemFamily>>(data);
+
+
+            var insertedInvoiceItems = ItemFamilylist.Where(x => x.StatusFlag == 'i').ToList();
+            var updatedInvoiceItems = ItemFamilylist.Where(x => x.StatusFlag == 'u').ToList();
+            var deletedInvoiceItems = ItemFamilylist.Where(x => x.StatusFlag == 'd').ToList(); 
+
+            foreach (var item in insertedInvoiceItems)
+            {
+                ItemsService.InsertFamily(item);
+            }
+            foreach (var item in updatedInvoiceItems)
+            {
+                ItemsService.UpdateFamily(item);
+            }
+            foreach (var item in deletedInvoiceItems)
+            {
+                ItemsService.DeleteFamily(item.ItemFamilyID);
+            }
+ 
+
+            return Ok(new BaseResponse(11));
+        }
+        [HttpGet, AllowAnonymous]
+        public IHttpActionResult UpdateItems(string data)
+        {
+            ITEM_ITEMYEAR Customlist = JsonConvert.DeserializeObject<ITEM_ITEMYEAR>(data);
+
+                   
+
+            var inserteItems = Customlist.I_Item.Where(x => x.StatusFlag == 'i').ToList();
+            var inserteItemyear = Customlist.I_ItemYear.Where(x => x.StatusFlag == 'i').ToList();
+            var updatedtems = Customlist.I_Item.Where(x => x.StatusFlag == 'u').ToList();
+            var updatedtemsYear = Customlist.I_ItemYear.Where(x => x.StatusFlag == 'u').ToList();
+            var deletedtems = Customlist.I_Item.Where(x => x.StatusFlag == 'd').ToList();
+
+            int i = 0;
+            foreach (var item in inserteItems)
+            { 
+                var items=  ItemsService.Insert(item);
+                inserteItemyear[i].ItemID = items.ItemID;
+                ItemsService.InsertItemyear(inserteItemyear[i]); 
+                i++;
+
+                Shared.TransactionProcess(Convert.ToInt32(1), 1, items.ItemID, "ItemDef", "Add", db);
+
+            }
+            int o = 0; ;
+            foreach (var item in updatedtems)
+            {
+                var items = ItemsService.Update(item); 
+                ItemsService.UpdateItemYear(updatedtemsYear[o]);
+
+                Shared.TransactionProcess(Convert.ToInt32(1), 1, items.ItemID, "ItemDef", "update", db);
+            }
+            foreach (var item in deletedtems)
+            {
+                ItemsService.Delete(item.ItemID);
+            }
+              
+
+            return Ok(new BaseResponse(11));
         }
 
-
-        [HttpPost, AllowAnonymous]
-        public IHttpActionResult Updat(List<PRODUCT> PRODUCTAll)
-        {
-
-            try
-            {
-                var InsertOperationItems = PRODUCTAll.Where(x => x.StatusFlag == 'i').ToList();
-                var updatedOperationItems = PRODUCTAll.Where(x => x.StatusFlag == 'u').ToList();
-                var deletedOperationItems = PRODUCTAll.Where(x => x.StatusFlag == 'd').ToList();
-
-
-                //loop Insert  I_Pur_TR_ReceiveItems
-                foreach (var item in InsertOperationItems)
-                {
-
-
-                    var Insert = ItemServices.Insert(item);
-
-                }
-
-                //loop Update  I_Pur_TR_ReceiveItems
-                foreach (var item in updatedOperationItems)
-                {
-
-                    var updated = ItemServices.Update(item);
-
-                }
-
-                //loop Delete  I_Pur_TR_ReceiveItems
-                foreach (var item in deletedOperationItems)
-                {
-                    int id = item.PRODUCT_ID;
-                    ItemServices.Delete(id);
-
-                }
-
-
-                return Ok(new BaseResponse("ok"));
-            }
-            catch (Exception)
-            {
-                return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, "الصنف مستخدم بافعل لا يمكنك تغيره"));
-            }
-
-        }
 
     }
 }

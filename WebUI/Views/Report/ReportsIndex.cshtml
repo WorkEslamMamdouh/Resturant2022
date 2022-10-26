@@ -1,0 +1,113 @@
+﻿@using Inv.WebUI.Resources
+@{
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+<style>
+
+    .des {
+        width: 20% !important;
+    }
+
+    .uom {
+        width: 11% !important;
+    }
+
+    .Zero {
+        width: 0% !important;
+    }
+
+    .Price {
+        width: 9% !important;
+    }
+</style>
+<body class="materialdesign">
+    <div class="content-inner-all">
+        <div class="inbox-mailbox-area mg-b-15">
+            <div class="container-fluid">
+                <div class="row" style="background-color:white;">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h4 style="font-size:-webkit-xxx-large;font-weight: bold;font-style:normal;">تقارير المبيعات</h4style="font-size:>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="col-lg-1">
+                                    
+                                </div>
+                                <div class="col-lg-2">
+                                    <div class="input-mark-inner mg-b-22">
+                                        <select id="txt_Shift" name="" class="form-control  text_Display" style="text-align: center; font-weight: bold; font-size: 22px; height: 11%;">
+                                            <option value="-1">اختر الشفـت</option>
+                                            <option value="1">( A )</option>
+                                            <option value="2">( B )</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-1">
+                                    <div class="input-mask-title" style="text-align: left;">
+                                        <label style="top: 12px; font-weight: bold;">شفـت</label>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                                    <input type="date" class="input-sm  form-control text-center" style="border-radius: 20px !important;font-weight: bold;font-size: 20px;" name="txtToDate" id="txtToDate">
+                                </div>
+                                <label for="txtToDate" class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 pading_2 textcentr_Clientaccstat" style="top: 12px; font-weight: bold;"> الي تاريخ  </label>
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                                    <input type="date" class="input-sm form-control  text-center" name="txtFromDate" style="border-radius: 20px !important;font-weight: bold;font-size: 20px;" id="txtFromDate">
+                                </div>
+                                <label for="txtFromDate" class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 pading_2" style="top: 12px; font-weight: bold;">من تاريخ </label>
+
+
+                            </div>
+
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 margingred ">
+                                <div class="col-sm-1 ">  </div>
+                                <div class="col-sm-10  borderred_Parr" style="">
+                                    <div class="col-sm-2 "></div>
+
+                                    <button id="btnExpense" type="button" class="btnPrintTrview StyleNew_ToolbarBUT_Print   btn btn-primary" style="border-radius: 48%;font-size: larger;"><span class="fa fa-print"></span>  تقرير المصاريف بالفترة  </button>
+                                    <button id="btnInventory" type="button" class="btnPrintTrview StyleNew_ToolbarBUT_Print   btn btn-primary" style="border-radius: 48%;font-size: larger;"><span class="fa fa-print"></span>  تقرير عام بالفتره  </button>
+                                    <button id="btnGeneralDet" type="button" class="btnPrintTrview StyleNew_ToolbarBUT_Print   btn btn-primary" style="border-radius: 48%;font-size: larger;"><span class="fa fa-print"></span>  تقرير بالفتره مفصل  </button>
+                                    <button id="btnGeneralSum" type="button" class="btnPrintTrview StyleNew_ToolbarBUT_Print   btn btn-primary" style="border-radius: 48%;font-size: larger;"><span class="fa fa-print"></span>  تقرير بالفترة ملخص</button>
+                                    <button id="btnDetDaily" type="button" class="btnPrintTrview StyleNew_ToolbarBUT_Print   btn btn-primary" style="border-radius: 48%;font-size: larger;"><span class="fa fa-print"></span>  تقرير يومي مفصل</button>
+                                    <button id="btnSumDaily" type="button" class="btnPrintTrview StyleNew_ToolbarBUT_Print   btn btn-primary" style="border-radius: 48%;font-size: larger;"><span class="fa fa-print"></span>  تقرير يومي ملخص</button>
+                                    @*<button id="btnPrintTrPDF" type="button" class="btnPrintTrPDF StyleNew_ToolbarBUT_Print btn btn-primary"><span class="adminpro-icon adminpro-download-arrow"></span>@SystemResource.Download_PDF</button>
+                                        <button id="btnPrintTrEXEL" type="button" class=" btnPrintTrEXEL StyleNew_ToolbarBUT_Print  btn btn-primary"><span class="adminpro-icon adminpro-download-arrow"></span>  @SystemResource.Download_EXCEL</button>
+                                        <button id="btnPrint" type="button" class="btnPrint StyleNew_ToolbarBUT_Print  btn btn-custon-four btndefolt primary-btn-cl display_none"><span class="adminpro-icon adminpro-paint-roller"></span>@SystemResource.App_Print</button>*@
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
+
+                                <div class="col-lg-2 ">
+
+                                </div>
+                                <div class="col-lg-3 ">
+
+                                </div>
+
+                                <div class="col-lg-2 ">
+                                    <button id="btnShow" type="button" class="btnPrintTrview StyleNew_ToolbarBUT_Print   btn btn-primary" style="border-radius: 10%;font-size: larger;"><span class="fa fa-search"></span> عـرض الفواتير   </button>
+                                </div>
+
+
+                                <input id="txtRFQFilter" name="RFQ" type="text" class="col-lg-3 " placeholder="رقم المرجع" style="width: 14%;font-weight: bold;font-size: 17px; color: #249600;text-align: center;">
+                                <label class="col-lg-1" style="width: 13%;font-weight: bold;font-size: 19px;">رقم المرجع </label>
+
+                            </div>
+                            <div class="col-lg-12">
+                                <table id="ReportGridInv">
+
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="~/ClientApp/Report/Reports.js"></script> 

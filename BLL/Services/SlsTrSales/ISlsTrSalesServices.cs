@@ -10,12 +10,12 @@ namespace Inv.BLL.Services.SlsTrSales
 {
     public interface ISlsTrSalesServices
     {
-        Stok_ORDER_DELIVERY GetById(int id);
-        List<Stok_ORDER_DELIVERY> GetAll();
-        List<Stok_ORDER_DELIVERY> GetAll(Expression<Func<Stok_ORDER_DELIVERY, bool>> predicate);
-        Stok_ORDER_DELIVERY Insert(Stok_ORDER_DELIVERY entity);
-        Stok_ORDER_DELIVERY Update(Stok_ORDER_DELIVERY entity);
-        void Delete(int id);
-        void UpdateList(List<Stok_ORDER_DELIVERY> Lstservice);
+        //Stok_ORDER_DELIVERY GetById(int id);
+        //List<Stok_ORDER_DELIVERY> GetAll();
+        //List<Stok_ORDER_DELIVERY> GetAll(Expression<Func<Stok_ORDER_DELIVERY, bool>> predicate);
+        //Stok_ORDER_DELIVERY Insert(Stok_ORDER_DELIVERY entity);
+        //Stok_ORDER_DELIVERY Update(Stok_ORDER_DELIVERY entity);
+        //void Delete(int id);
+        //void UpdateList(List<Stok_ORDER_DELIVERY> Lstservice);
     }
 }

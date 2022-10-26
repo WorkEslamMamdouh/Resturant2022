@@ -22,6 +22,15 @@ namespace Inv.WebUI.Reports.Forms
     }
 
 
+
+    public class TR_InvoiceCust
+    {
+        public string TrNo { get; set; }
+        public string CreatedBy { get; set; }
+        public string DocNo { get; set; }
+    
+    }
+
     public class ReportInfo
     {
         public string dataSource { get; set; }

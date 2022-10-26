@@ -56,13 +56,28 @@ namespace Inv.DAL.Domain
        
     }
   
+    public partial class I_Sls_TR_InvoiceItems : SecurityandUpdateFlagClass
+    {
+
+    } 
+    public partial class ITEM_ITEAMYEAR : SecurityandUpdateFlagClass
+    {
+
+    } 
     public partial class G_Nationality : SecurityandUpdateFlagClass
     {
 
     }
+    public partial class I_D_UnitGroup : SecurityandUpdateFlagClass
+    {
 
+    }
+    public partial class I_D_UnitGroupUom : SecurityandUpdateFlagClass
+    {
 
+    }
 
+   
     public partial class G_USERS : SecurityClass_G_USERS
     {
 
@@ -71,8 +86,107 @@ namespace Inv.DAL.Domain
     {
 
     }
+    public partial class I_D_Category : SecurityandUpdateFlagClass
+    {
 
-    public partial class G_CONTROL : SecurityandUpdateFlagClass
+    }
+
+    public partial class A_RecPay_D_Category : SecurityandUpdateFlagClass
+    {
+
+    }
+    public partial class A_RecPay_D_Group : SecurityandUpdateFlagClass
+    {
+
+    }
+    public partial class I_ItemFamily : SecurityandUpdateFlagClass
+    {
+
+    }
+
+    public partial class I_Item : SecurityandUpdateFlagClass
+    {
+
+    }
+
+    public partial class A_ACCOUNT : SecurityandUpdateFlagClass_FIN_YEAR
+    {
+
+    }
+    public partial class AQ_GetAccount : SecurityandUpdateFlagClass_FIN_YEAR
+    {
+
+    }
+    public partial class A_RecPay_D_AjustmentType : SecurityandUpdateFlagClass
+    {
+
+    }
+    public partial class A_RecPay_D_Accounts : SecurityandUpdateFlagClass
+    {
+
+    }
+    public partial class A_Pay_D_Vendor : SecurityandUpdateFlagClass
+    {
+
+    }
+    public partial class A_Rec_D_Customer : SecurityClass
+    {
+
+    }
+    public partial class I_Sls_D_Salesman : SecurityandUpdateFlagClass
+    {
+    }
+    public partial class A_RecPay_D_CashBox : SecurityandUpdateFlagClass
+    {
+    }
+    public partial class I_Sls_TR_InvoiceItems : SecurityandUpdateFlagClass
+    {
+    }
+    public partial class A_RecPay_Tr_ReceiptNote : SecurityClass
+    {
+    }
+    public partial class I_Pur_TR_Receive : SecurityandUpdateFlagClass
+    {
+    }
+
+    public partial class I_Pur_TR_ReceiveItems : SecurityandUpdateFlagClass
+    {
+    }
+
+    public partial class I_Pur_Tr_ReceiveCharges : SecurityandUpdateFlagClass
+    {
+    }
+    public partial class A_RecPay_Tr_Adjustment : SecurityandUpdateFlagClass
+    {
+    }
+    public partial class I_Sls_TR_Invoice : SecurityClass
+    {
+    }
+    public partial class I_TR_Operation : SecurityClass
+    {
+    }
+    public partial class I_TR_OperationItems : SecurityandUpdateFlagClass
+    {
+    }
+    public partial class I_TR_OperationCharges : SecurityandUpdateFlagClass
+    {
+    }
+    public partial class I_TR_OperationDeposit : SecurityandUpdateFlagClass
+    {
+    }
+    public partial class A_TmpVoucherProcess : VoucherStatusClass 
+    {
+    }
+    public partial class A_JOURNAL_DETAIL : SecurityandUpdateFlagClass
+    {
+    }
+    public partial class A_TR_VchrTemplateDetail : SecurityandUpdateFlagClass
+    {
+    }
+    public partial class G_COST_CENTER : SecurityandUpdateFlagClass
+    {
+    }
+      public partial class G_CONTROL : SecurityandUpdateFlagClass
     {
     }
     public partial class I_ItemYear : SecurityandUpdateFlagClass
@@ -83,79 +197,94 @@ namespace Inv.DAL.Domain
     }
     public partial class G_SUB_SYSTEMS : SecurityandUpdateFlagClass
     {
+    }public partial class G_LnkTrans : SecurityandUpdateFlagClass
+    {
+    }
+    public partial class G_LnkTransVoucher : SecurityandUpdateFlagClass_serial
+    {
+    }
+    public partial class G_LnkTransVariable : SecurityandUpdateFlagClass
+    {
+    }
+    public partial class G_LnkVar : SecurityandUpdateFlagClass
+    {
+    }
+    public partial class I_Stk_TR_TransferDetails : SecurityandUpdateFlagClass
+    {
     }
     public partial class G_USER_BRANCH : UpdateFlagClass
     {
     }
-
+    public partial class I_Stk_Tr_AdjustDetails : SecurityandUpdateFlagClass
+    {
+    }
+    public partial class I_Pur_D_Charges : SecurityandUpdateFlagClass
+    {
+    }
+    public partial class I_Pur_Tr_PurchaseOrderDetail : SecurityandUpdateFlagClass
+    {
+    }
     public partial class G_STORE : SecurityandUpdateFlagClass
     {
     }
-
+    public partial class I_TR_OperationTFDetail : SecurityandUpdateFlagClass
+    {
+    }
     public partial class A_Pay_D_VendorDoc : SecurityandUpdateFlagClass
     {
     }
     public partial class A_Rec_D_CustomerDoc : SecurityandUpdateFlagClass
     {
     }
+    public partial class AVAT_D_SrvCategory : SecurityClass
+    {
+    } 
+    public partial class AVAT_TR_PurInvoice : SecurityClass
+    {
+    }
 
+    public partial class AVAT_TR_PurInvoiceDetail : SecurityandUpdateFlagClass
+    {
+    }
+    public partial class AVAT_TR_PurInvoiceHeader : SecurityandUpdateFlagClass
+    {
+    }
+
+    public partial class AVAT_TR_SlsInvoiceItem : SecurityandUpdateFlagClass
+    {
+    }
+    public partial class AVAT_TR_PurInvoiceRet : SecurityClass
+    {
+    }
     public partial class G_COMPANY : SecurityandUpdateFlagClass
     {
     }
     public partial class G_AlertControl : SecurityClass
     {
     }
-
-
-    //---------------------------------------------------------------------------------------------------------------
-
-    public partial class PRODUCT : SecurityandUpdateFlagClass
+    public partial class A_CCDT_Types : SecurityClass
     {
-
     }
-    public partial class CATEGRE : SecurityandUpdateFlagClass
+    public partial class A_CCDT_COSTCENTERS : SecurityandUpdateFlagClass
     {
-
     }
-    public partial class Stok_ORDER_DELIVERY : SecurityandUpdateFlagClass
+    public partial class AVAT_CONTROL : SecurityClass
     {
-
     }
-    public partial class CUSTOMER : SecurityandUpdateFlagClass
+    public partial class AVAT_PERIOD : SecurityClass
     {
-
     }
-    public partial class Outlet : SecurityandUpdateFlagClass
+    public partial class AVAT_TRANS : SecurityClass
     {
-
     }
-    public partial class Supplier : SecurityandUpdateFlagClass
+    public partial class A_CashVoucher_Detail : SecurityandUpdateFlagClass
     {
-
     }
-    public partial class CUSTOMER : SecurityandUpdateFlagClass
+        public partial class A_CashVoucher_Header : SecurityandUpdateFlagClass
     {
-
     }
-    public partial class Purchases_Details : SecurityandUpdateFlagClass
+    public partial class AVAT_D_Service : SecurityandUpdateFlagClass
     {
-
-    }
-    public partial class IQ_Purchases_Details : SecurityandUpdateFlagClass
-    {
-
-    }
-    public partial class Purchases_Master : SecurityandUpdateFlagClass
-    {
-
-    }
-    public partial class familly_Cat : SecurityandUpdateFlagClass
-    {
-
-    }
-    public partial class G_COST_CENTER : SecurityandUpdateFlagClass
-    {
-
     }
 
 

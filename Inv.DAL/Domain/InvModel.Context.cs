@@ -27,10 +27,8 @@ namespace Inv.DAL.Domain
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<CATEGRE> CATEGRES { get; set; }
-        public virtual DbSet<EMPLOYEE> EMPLOYEEs { get; set; }
-        public virtual DbSet<Enter_Money> Enter_Money { get; set; }
-        public virtual DbSet<familly_Cat> familly_Cat { get; set; }
+        public virtual DbSet<A_D_VAT_TYPE> A_D_VAT_TYPE { get; set; }
+        public virtual DbSet<A_PERIOD> A_PERIOD { get; set; }
         public virtual DbSet<G_AlertControl> G_AlertControl { get; set; }
         public virtual DbSet<G_AlertLog> G_AlertLog { get; set; }
         public virtual DbSet<G_AlertType> G_AlertType { get; set; }
@@ -41,11 +39,14 @@ namespace Inv.DAL.Domain
         public virtual DbSet<G_Currency> G_Currency { get; set; }
         public virtual DbSet<G_ModuleHelp> G_ModuleHelp { get; set; }
         public virtual DbSet<G_MODULES> G_MODULES { get; set; }
+        public virtual DbSet<G_Nationality> G_Nationality { get; set; }
+        public virtual DbSet<G_News> G_News { get; set; }
         public virtual DbSet<G_Noteifications> G_Noteifications { get; set; }
         public virtual DbSet<G_NotificationCompany> G_NotificationCompany { get; set; }
         public virtual DbSet<G_PaperSize> G_PaperSize { get; set; }
         public virtual DbSet<G_REGION> G_REGION { get; set; }
         public virtual DbSet<G_REGION_BRANCH> G_REGION_BRANCH { get; set; }
+        public virtual DbSet<G_ReportWebSetting> G_ReportWebSetting { get; set; }
         public virtual DbSet<G_Role> G_Role { get; set; }
         public virtual DbSet<G_RoleModule> G_RoleModule { get; set; }
         public virtual DbSet<G_RoleUsers> G_RoleUsers { get; set; }
@@ -59,36 +60,58 @@ namespace Inv.DAL.Domain
         public virtual DbSet<G_USER_BRANCH> G_USER_BRANCH { get; set; }
         public virtual DbSet<G_USER_COMPANY> G_USER_COMPANY { get; set; }
         public virtual DbSet<G_USER_LOG> G_USER_LOG { get; set; }
+        public virtual DbSet<G_USERS> G_USERS { get; set; }
+        public virtual DbSet<G_VatNature> G_VatNature { get; set; }
         public virtual DbSet<I_Control> I_Control { get; set; }
-        public virtual DbSet<ORDER_DELIVERY> ORDER_DELIVERY { get; set; }
-        public virtual DbSet<Outlet> Outlets { get; set; }
-        public virtual DbSet<PRODUCT> PRODUCTs { get; set; }
-        public virtual DbSet<Purchases_Details> Purchases_Details { get; set; }
-        public virtual DbSet<Purchases_Master> Purchases_Master { get; set; }
-        public virtual DbSet<Report_Parameters> Report_Parameters { get; set; }
-        public virtual DbSet<Settings_Report> Settings_Report { get; set; }
-        public virtual DbSet<Stok_ORDER_DELIVERY> Stok_ORDER_DELIVERY { get; set; }
-        public virtual DbSet<Supplier> Suppliers { get; set; }
-        public virtual DbSet<Table_two_days> Table_two_days { get; set; }
-        public virtual DbSet<The_Gard> The_Gard { get; set; }
+        public virtual DbSet<I_D_CURRENCY> I_D_CURRENCY { get; set; }
         public virtual DbSet<HIJRA_CONVERT> HIJRA_CONVERT { get; set; }
         public virtual DbSet<GQ_GetUserBarnchAccess> GQ_GetUserBarnchAccess { get; set; }
         public virtual DbSet<GQ_GetUserBranch> GQ_GetUserBranch { get; set; }
-        public virtual DbSet<GQ_GetUserModule> GQ_GetUserModule { get; set; }
         public virtual DbSet<GQ_GetUserRole> GQ_GetUserRole { get; set; }
-        public virtual DbSet<GQ_GetUsers> GQ_GetUsers { get; set; }
         public virtual DbSet<GQ_Notifications> GQ_Notifications { get; set; }
         public virtual DbSet<GQ_ReportWebSetting> GQ_ReportWebSetting { get; set; }
         public virtual DbSet<I_VW_GetCompStatus> I_VW_GetCompStatus { get; set; }
-        public virtual DbSet<IQ_Outlet> IQ_Outlet { get; set; }
-        public virtual DbSet<IQ_Purchases_Details> IQ_Purchases_Details { get; set; }
-        public virtual DbSet<IQ_Purchases_Master> IQ_Purchases_Master { get; set; }
-        public virtual DbSet<ReviewSalesItemInfo> ReviewSalesItemInfoes { get; set; }
-        public virtual DbSet<ReviewSalesMaster> ReviewSalesMasters { get; set; }
-        public virtual DbSet<CUSTOMER> CUSTOMERs { get; set; }
-        public virtual DbSet<Catch_Receipt> Catch_Receipt { get; set; }
-        public virtual DbSet<IQ_Catch_Receipt> IQ_Catch_Receipt { get; set; }
-        public virtual DbSet<G_USERS> G_USERS { get; set; }
+        public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<I_D_UOM> I_D_UOM { get; set; }
+        public virtual DbSet<Salesman> Salesmen { get; set; }
+        public virtual DbSet<I_D_Category> I_D_Category { get; set; }
+        public virtual DbSet<I_ItemYearUom> I_ItemYearUom { get; set; }
+        public virtual DbSet<I_D_UnitGroup> I_D_UnitGroup { get; set; }
+        public virtual DbSet<I_D_UnitGroupUom1> I_D_UnitGroupUom1 { get; set; }
+        public virtual DbSet<I_Item> I_Item { get; set; }
+        public virtual DbSet<I_ItemFamily> I_ItemFamily { get; set; }
+        public virtual DbSet<I_ItemStore> I_ItemStore { get; set; }
+        public virtual DbSet<I_Sls_TR_Invoice> I_Sls_TR_Invoice { get; set; }
+        public virtual DbSet<I_Sls_TR_InvoiceItems> I_Sls_TR_InvoiceItems { get; set; }
+        public virtual DbSet<I_ItemYear> I_ItemYear { get; set; }
+        public virtual DbSet<G_STORE> G_STORE { get; set; }
+        public virtual DbSet<IQ_GetItemStoreInfo> IQ_GetItemStoreInfo { get; set; }
+        public virtual DbSet<Expense> Expenses { get; set; }
+    
+        public virtual int G_TOL_GetCounter(string system, Nullable<int> comp, Nullable<int> branch, Nullable<System.DateTime> dt, string trType, ObjectParameter trNo)
+        {
+            var systemParameter = system != null ?
+                new ObjectParameter("System", system) :
+                new ObjectParameter("System", typeof(string));
+    
+            var compParameter = comp.HasValue ?
+                new ObjectParameter("Comp", comp) :
+                new ObjectParameter("Comp", typeof(int));
+    
+            var branchParameter = branch.HasValue ?
+                new ObjectParameter("Branch", branch) :
+                new ObjectParameter("Branch", typeof(int));
+    
+            var dtParameter = dt.HasValue ?
+                new ObjectParameter("dt", dt) :
+                new ObjectParameter("dt", typeof(System.DateTime));
+    
+            var trTypeParameter = trType != null ?
+                new ObjectParameter("TrType", trType) :
+                new ObjectParameter("TrType", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("G_TOL_GetCounter", systemParameter, compParameter, branchParameter, dtParameter, trTypeParameter, trNo);
+        }
     
         [DbFunction("InvEntities", "GFun_Companies")]
         public virtual IQueryable<GFun_Companies_Result> GFun_Companies(string userCode)
@@ -98,167 +121,6 @@ namespace Inv.DAL.Domain
                 new ObjectParameter("userCode", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<GFun_Companies_Result>("[InvEntities].[GFun_Companies](@userCode)", userCodeParameter);
-        }
-    
-        [DbFunction("InvEntities", "GFun_UserCompanyBranch")]
-        public virtual IQueryable<GFun_UserCompanyBranch_Result> GFun_UserCompanyBranch(string userCode, Nullable<int> compCode)
-        {
-            var userCodeParameter = userCode != null ?
-                new ObjectParameter("userCode", userCode) :
-                new ObjectParameter("userCode", typeof(string));
-    
-            var compCodeParameter = compCode.HasValue ?
-                new ObjectParameter("CompCode", compCode) :
-                new ObjectParameter("CompCode", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<GFun_UserCompanyBranch_Result>("[InvEntities].[GFun_UserCompanyBranch](@userCode, @CompCode)", userCodeParameter, compCodeParameter);
-        }
-    
-        [DbFunction("InvEntities", "GFunc_GetPrivilage")]
-        public virtual IQueryable<GFunc_GetPrivilage_Result> GFunc_GetPrivilage(Nullable<int> year, Nullable<int> comp, Nullable<int> bra, string user, string sys, string mod)
-        {
-            var yearParameter = year.HasValue ?
-                new ObjectParameter("year", year) :
-                new ObjectParameter("year", typeof(int));
-    
-            var compParameter = comp.HasValue ?
-                new ObjectParameter("Comp", comp) :
-                new ObjectParameter("Comp", typeof(int));
-    
-            var braParameter = bra.HasValue ?
-                new ObjectParameter("bra", bra) :
-                new ObjectParameter("bra", typeof(int));
-    
-            var userParameter = user != null ?
-                new ObjectParameter("user", user) :
-                new ObjectParameter("user", typeof(string));
-    
-            var sysParameter = sys != null ?
-                new ObjectParameter("Sys", sys) :
-                new ObjectParameter("Sys", typeof(string));
-    
-            var modParameter = mod != null ?
-                new ObjectParameter("Mod", mod) :
-                new ObjectParameter("Mod", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<GFunc_GetPrivilage_Result>("[InvEntities].[GFunc_GetPrivilage](@year, @Comp, @bra, @user, @Sys, @Mod)", yearParameter, compParameter, braParameter, userParameter, sysParameter, modParameter);
-        }
-    
-        [DbFunction("InvEntities", "GFunc_GetPrivilageOld")]
-        public virtual IQueryable<GFunc_GetPrivilageOld_Result> GFunc_GetPrivilageOld(Nullable<int> comp, Nullable<int> bra, string user, string sys, string sub, string mod)
-        {
-            var compParameter = comp.HasValue ?
-                new ObjectParameter("Comp", comp) :
-                new ObjectParameter("Comp", typeof(int));
-    
-            var braParameter = bra.HasValue ?
-                new ObjectParameter("bra", bra) :
-                new ObjectParameter("bra", typeof(int));
-    
-            var userParameter = user != null ?
-                new ObjectParameter("user", user) :
-                new ObjectParameter("user", typeof(string));
-    
-            var sysParameter = sys != null ?
-                new ObjectParameter("Sys", sys) :
-                new ObjectParameter("Sys", typeof(string));
-    
-            var subParameter = sub != null ?
-                new ObjectParameter("sub", sub) :
-                new ObjectParameter("sub", typeof(string));
-    
-            var modParameter = mod != null ?
-                new ObjectParameter("Mod", mod) :
-                new ObjectParameter("Mod", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<GFunc_GetPrivilageOld_Result>("[InvEntities].[GFunc_GetPrivilageOld](@Comp, @bra, @user, @Sys, @sub, @Mod)", compParameter, braParameter, userParameter, sysParameter, subParameter, modParameter);
-        }
-    
-        [DbFunction("InvEntities", "GFunc_GetPrivilageRole")]
-        public virtual IQueryable<GFunc_GetPrivilageRole_Result> GFunc_GetPrivilageRole(Nullable<int> comp, Nullable<int> bra, string user, string sys, string sub, string mod)
-        {
-            var compParameter = comp.HasValue ?
-                new ObjectParameter("Comp", comp) :
-                new ObjectParameter("Comp", typeof(int));
-    
-            var braParameter = bra.HasValue ?
-                new ObjectParameter("bra", bra) :
-                new ObjectParameter("bra", typeof(int));
-    
-            var userParameter = user != null ?
-                new ObjectParameter("user", user) :
-                new ObjectParameter("user", typeof(string));
-    
-            var sysParameter = sys != null ?
-                new ObjectParameter("Sys", sys) :
-                new ObjectParameter("Sys", typeof(string));
-    
-            var subParameter = sub != null ?
-                new ObjectParameter("sub", sub) :
-                new ObjectParameter("sub", typeof(string));
-    
-            var modParameter = mod != null ?
-                new ObjectParameter("Mod", mod) :
-                new ObjectParameter("Mod", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<GFunc_GetPrivilageRole_Result>("[InvEntities].[GFunc_GetPrivilageRole](@Comp, @bra, @user, @Sys, @sub, @Mod)", compParameter, braParameter, userParameter, sysParameter, subParameter, modParameter);
-        }
-    
-        [DbFunction("InvEntities", "GFunc_GetPrivilageUM")]
-        public virtual IQueryable<GFunc_GetPrivilageUM_Result> GFunc_GetPrivilageUM(Nullable<int> comp, Nullable<int> bra, string user, string sys, string sub, string mod)
-        {
-            var compParameter = comp.HasValue ?
-                new ObjectParameter("Comp", comp) :
-                new ObjectParameter("Comp", typeof(int));
-    
-            var braParameter = bra.HasValue ?
-                new ObjectParameter("bra", bra) :
-                new ObjectParameter("bra", typeof(int));
-    
-            var userParameter = user != null ?
-                new ObjectParameter("user", user) :
-                new ObjectParameter("user", typeof(string));
-    
-            var sysParameter = sys != null ?
-                new ObjectParameter("Sys", sys) :
-                new ObjectParameter("Sys", typeof(string));
-    
-            var subParameter = sub != null ?
-                new ObjectParameter("sub", sub) :
-                new ObjectParameter("sub", typeof(string));
-    
-            var modParameter = mod != null ?
-                new ObjectParameter("Mod", mod) :
-                new ObjectParameter("Mod", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<GFunc_GetPrivilageUM_Result>("[InvEntities].[GFunc_GetPrivilageUM](@Comp, @bra, @user, @Sys, @sub, @Mod)", compParameter, braParameter, userParameter, sysParameter, subParameter, modParameter);
-        }
-    
-        public virtual int A_ProcessVouchers(string userCode, Nullable<int> comp, Nullable<int> opCode)
-        {
-            var userCodeParameter = userCode != null ?
-                new ObjectParameter("userCode", userCode) :
-                new ObjectParameter("userCode", typeof(string));
-    
-            var compParameter = comp.HasValue ?
-                new ObjectParameter("Comp", comp) :
-                new ObjectParameter("Comp", typeof(int));
-    
-            var opCodeParameter = opCode.HasValue ?
-                new ObjectParameter("OpCode", opCode) :
-                new ObjectParameter("OpCode", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("A_ProcessVouchers", userCodeParameter, compParameter, opCodeParameter);
-        }
-    
-        public virtual int Close_days()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Close_days");
-        }
-    
-        public virtual ObjectResult<Nullable<System.DateTime>> Date_Time_Now()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<System.DateTime>>("Date_Time_Now");
         }
     
         public virtual int G_ProcessTrans(Nullable<int> comp, Nullable<int> branch, string trType, string opMode, Nullable<int> trID, ObjectParameter trNo, ObjectParameter ok)
@@ -286,101 +148,7 @@ namespace Inv.DAL.Domain
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("G_ProcessTrans", compParameter, branchParameter, trTypeParameter, opModeParameter, trIDParameter, trNo, ok);
         }
     
-        public virtual int G_TOL_GetCounter(string system, Nullable<int> comp, Nullable<int> branch, string trType, ObjectParameter trNo)
-        {
-            var systemParameter = system != null ?
-                new ObjectParameter("System", system) :
-                new ObjectParameter("System", typeof(string));
-    
-            var compParameter = comp.HasValue ?
-                new ObjectParameter("Comp", comp) :
-                new ObjectParameter("Comp", typeof(int));
-    
-            var branchParameter = branch.HasValue ?
-                new ObjectParameter("Branch", branch) :
-                new ObjectParameter("Branch", typeof(int));
-    
-            var trTypeParameter = trType != null ?
-                new ObjectParameter("TrType", trType) :
-                new ObjectParameter("TrType", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("G_TOL_GetCounter", systemParameter, compParameter, branchParameter, trTypeParameter, trNo);
-        }
-    
-        public virtual ObjectResult<Nullable<decimal>> Get_Balance()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Get_Balance");
-        }
-    
-        public virtual ObjectResult<Get_Settings_Report_Result> Get_Settings_Report(string iD_Button_Print)
-        {
-            var iD_Button_PrintParameter = iD_Button_Print != null ?
-                new ObjectParameter("ID_Button_Print", iD_Button_Print) :
-                new ObjectParameter("ID_Button_Print", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Get_Settings_Report_Result>("Get_Settings_Report", iD_Button_PrintParameter);
-        }
-    
-        public virtual ObjectResult<Get_Settings_Report_and_Parameter_Result> Get_Settings_Report_and_Parameter(string iD_Button_Print)
-        {
-            var iD_Button_PrintParameter = iD_Button_Print != null ?
-                new ObjectParameter("ID_Button_Print", iD_Button_Print) :
-                new ObjectParameter("ID_Button_Print", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Get_Settings_Report_and_Parameter_Result>("Get_Settings_Report_and_Parameter", iD_Button_PrintParameter);
-        }
-    
-        public virtual int GLnk_GenerateTrans(Nullable<int> comp, Nullable<int> bra, string user, string sys, string tRType, string fromDate, string toDate, Nullable<int> fromno, Nullable<int> toNo)
-        {
-            var compParameter = comp.HasValue ?
-                new ObjectParameter("comp", comp) :
-                new ObjectParameter("comp", typeof(int));
-    
-            var braParameter = bra.HasValue ?
-                new ObjectParameter("Bra", bra) :
-                new ObjectParameter("Bra", typeof(int));
-    
-            var userParameter = user != null ?
-                new ObjectParameter("User", user) :
-                new ObjectParameter("User", typeof(string));
-    
-            var sysParameter = sys != null ?
-                new ObjectParameter("Sys", sys) :
-                new ObjectParameter("Sys", typeof(string));
-    
-            var tRTypeParameter = tRType != null ?
-                new ObjectParameter("TRType", tRType) :
-                new ObjectParameter("TRType", typeof(string));
-    
-            var fromDateParameter = fromDate != null ?
-                new ObjectParameter("FromDate", fromDate) :
-                new ObjectParameter("FromDate", typeof(string));
-    
-            var toDateParameter = toDate != null ?
-                new ObjectParameter("ToDate", toDate) :
-                new ObjectParameter("ToDate", typeof(string));
-    
-            var fromnoParameter = fromno.HasValue ?
-                new ObjectParameter("Fromno", fromno) :
-                new ObjectParameter("Fromno", typeof(int));
-    
-            var toNoParameter = toNo.HasValue ?
-                new ObjectParameter("ToNo", toNo) :
-                new ObjectParameter("ToNo", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GLnk_GenerateTrans", compParameter, braParameter, userParameter, sysParameter, tRTypeParameter, fromDateParameter, toDateParameter, fromnoParameter, toNoParameter);
-        }
-    
-        public virtual int GLnk_GenerateTransVchr(string user)
-        {
-            var userParameter = user != null ?
-                new ObjectParameter("user", user) :
-                new ObjectParameter("user", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GLnk_GenerateTransVchr", userParameter);
-        }
-    
-        public virtual int GProc_CreateBranch(Nullable<int> comp, Nullable<int> bra)
+        public virtual ObjectResult<Prnt_Quotation_Result> Prnt_Quotation(Nullable<int> comp, Nullable<int> bra, string compNameA, string compNameE, string braNameA, string braNameE, string loginUser, Nullable<int> repType, Nullable<int> tRId)
         {
             var compParameter = comp.HasValue ?
                 new ObjectParameter("comp", comp) :
@@ -390,184 +158,67 @@ namespace Inv.DAL.Domain
                 new ObjectParameter("bra", bra) :
                 new ObjectParameter("bra", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GProc_CreateBranch", compParameter, braParameter);
+            var compNameAParameter = compNameA != null ?
+                new ObjectParameter("CompNameA", compNameA) :
+                new ObjectParameter("CompNameA", typeof(string));
+    
+            var compNameEParameter = compNameE != null ?
+                new ObjectParameter("CompNameE", compNameE) :
+                new ObjectParameter("CompNameE", typeof(string));
+    
+            var braNameAParameter = braNameA != null ?
+                new ObjectParameter("BraNameA", braNameA) :
+                new ObjectParameter("BraNameA", typeof(string));
+    
+            var braNameEParameter = braNameE != null ?
+                new ObjectParameter("BraNameE", braNameE) :
+                new ObjectParameter("BraNameE", typeof(string));
+    
+            var loginUserParameter = loginUser != null ?
+                new ObjectParameter("LoginUser", loginUser) :
+                new ObjectParameter("LoginUser", typeof(string));
+    
+            var repTypeParameter = repType.HasValue ?
+                new ObjectParameter("RepType", repType) :
+                new ObjectParameter("RepType", typeof(int));
+    
+            var tRIdParameter = tRId.HasValue ?
+                new ObjectParameter("TRId", tRId) :
+                new ObjectParameter("TRId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Prnt_Quotation_Result>("Prnt_Quotation", compParameter, braParameter, compNameAParameter, compNameEParameter, braNameAParameter, braNameEParameter, loginUserParameter, repTypeParameter, tRIdParameter);
         }
     
-        public virtual int GProc_CreateStore(Nullable<int> comp, Nullable<int> bra, Nullable<int> stCode)
+        public virtual int Iproc_GetItemInfo(Nullable<int> comp, Nullable<int> yr, string itmCode, Nullable<int> itemid, Nullable<int> storeid, Nullable<int> op)
         {
-            var compParameter = comp.HasValue ?
-                new ObjectParameter("comp", comp) :
-                new ObjectParameter("comp", typeof(int));
-    
-            var braParameter = bra.HasValue ?
-                new ObjectParameter("bra", bra) :
-                new ObjectParameter("bra", typeof(int));
-    
-            var stCodeParameter = stCode.HasValue ?
-                new ObjectParameter("stCode", stCode) :
-                new ObjectParameter("stCode", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GProc_CreateStore", compParameter, braParameter, stCodeParameter);
-        }
-    
-        public virtual int GProc_CreateUser(string user, string likeUser)
-        {
-            var userParameter = user != null ?
-                new ObjectParameter("User", user) :
-                new ObjectParameter("User", typeof(string));
-    
-            var likeUserParameter = likeUser != null ?
-                new ObjectParameter("LikeUser", likeUser) :
-                new ObjectParameter("LikeUser", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GProc_CreateUser", userParameter, likeUserParameter);
-        }
-    
-        public virtual int GProc_SecCreateUser(string user, Nullable<int> comp)
-        {
-            var userParameter = user != null ?
-                new ObjectParameter("User", user) :
-                new ObjectParameter("User", typeof(string));
-    
             var compParameter = comp.HasValue ?
                 new ObjectParameter("Comp", comp) :
                 new ObjectParameter("Comp", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GProc_SecCreateUser", userParameter, compParameter);
+            var yrParameter = yr.HasValue ?
+                new ObjectParameter("Yr", yr) :
+                new ObjectParameter("Yr", typeof(int));
+    
+            var itmCodeParameter = itmCode != null ?
+                new ObjectParameter("ItmCode", itmCode) :
+                new ObjectParameter("ItmCode", typeof(string));
+    
+            var itemidParameter = itemid.HasValue ?
+                new ObjectParameter("Itemid", itemid) :
+                new ObjectParameter("Itemid", typeof(int));
+    
+            var storeidParameter = storeid.HasValue ?
+                new ObjectParameter("Storeid", storeid) :
+                new ObjectParameter("Storeid", typeof(int));
+    
+            var opParameter = op.HasValue ?
+                new ObjectParameter("op", op) :
+                new ObjectParameter("op", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Iproc_GetItemInfo", compParameter, yrParameter, itmCodeParameter, itemidParameter, storeidParameter, opParameter);
         }
     
-        public virtual ObjectResult<Nullable<decimal>> Insert_Enter_Money(string dasc_Name, Nullable<decimal> pirce, string userName, string tr_Type)
-        {
-            var dasc_NameParameter = dasc_Name != null ?
-                new ObjectParameter("Dasc_Name", dasc_Name) :
-                new ObjectParameter("Dasc_Name", typeof(string));
-    
-            var pirceParameter = pirce.HasValue ?
-                new ObjectParameter("pirce", pirce) :
-                new ObjectParameter("pirce", typeof(decimal));
-    
-            var userNameParameter = userName != null ?
-                new ObjectParameter("UserName", userName) :
-                new ObjectParameter("UserName", typeof(string));
-    
-            var tr_TypeParameter = tr_Type != null ?
-                new ObjectParameter("Tr_Type", tr_Type) :
-                new ObjectParameter("Tr_Type", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Insert_Enter_Money", dasc_NameParameter, pirceParameter, userNameParameter, tr_TypeParameter);
-        }
-    
-        public virtual ObjectResult<Nullable<int>> insert_ORDER_DELIVERY(string userName, Nullable<int> namber_Order_Delivery, Nullable<decimal> total_All, string date_Order_Delivery, Nullable<double> tax, Nullable<int> cUSTOMER_ID, string type_order, Nullable<bool> confirmation)
-        {
-            var userNameParameter = userName != null ?
-                new ObjectParameter("UserName", userName) :
-                new ObjectParameter("UserName", typeof(string));
-    
-            var namber_Order_DeliveryParameter = namber_Order_Delivery.HasValue ?
-                new ObjectParameter("Namber_Order_Delivery", namber_Order_Delivery) :
-                new ObjectParameter("Namber_Order_Delivery", typeof(int));
-    
-            var total_AllParameter = total_All.HasValue ?
-                new ObjectParameter("Total_All", total_All) :
-                new ObjectParameter("Total_All", typeof(decimal));
-    
-            var date_Order_DeliveryParameter = date_Order_Delivery != null ?
-                new ObjectParameter("Date_Order_Delivery", date_Order_Delivery) :
-                new ObjectParameter("Date_Order_Delivery", typeof(string));
-    
-            var taxParameter = tax.HasValue ?
-                new ObjectParameter("Tax", tax) :
-                new ObjectParameter("Tax", typeof(double));
-    
-            var cUSTOMER_IDParameter = cUSTOMER_ID.HasValue ?
-                new ObjectParameter("CUSTOMER_ID", cUSTOMER_ID) :
-                new ObjectParameter("CUSTOMER_ID", typeof(int));
-    
-            var type_orderParameter = type_order != null ?
-                new ObjectParameter("type_order", type_order) :
-                new ObjectParameter("type_order", typeof(string));
-    
-            var confirmationParameter = confirmation.HasValue ?
-                new ObjectParameter("Confirmation", confirmation) :
-                new ObjectParameter("Confirmation", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("insert_ORDER_DELIVERY", userNameParameter, namber_Order_DeliveryParameter, total_AllParameter, date_Order_DeliveryParameter, taxParameter, cUSTOMER_IDParameter, type_orderParameter, confirmationParameter);
-        }
-    
-        public virtual ObjectResult<Nullable<decimal>> insert_Outlet(string dasc_Name, Nullable<decimal> pirce, string userName, string tr_Type)
-        {
-            var dasc_NameParameter = dasc_Name != null ?
-                new ObjectParameter("Dasc_Name", dasc_Name) :
-                new ObjectParameter("Dasc_Name", typeof(string));
-    
-            var pirceParameter = pirce.HasValue ?
-                new ObjectParameter("pirce", pirce) :
-                new ObjectParameter("pirce", typeof(decimal));
-    
-            var userNameParameter = userName != null ?
-                new ObjectParameter("UserName", userName) :
-                new ObjectParameter("UserName", typeof(string));
-    
-            var tr_TypeParameter = tr_Type != null ?
-                new ObjectParameter("Tr_Type", tr_Type) :
-                new ObjectParameter("Tr_Type", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("insert_Outlet", dasc_NameParameter, pirceParameter, userNameParameter, tr_TypeParameter);
-        }
-    
-        public virtual ObjectResult<Nullable<int>> insert_Purchases_Master(string tr_Date, Nullable<int> iD_Supplier, Nullable<bool> type_Debit, Nullable<decimal> total_Amount, Nullable<decimal> paid_Up, Nullable<decimal> to_be_Paid, string rEMARKS)
-        {
-            var tr_DateParameter = tr_Date != null ?
-                new ObjectParameter("Tr_Date", tr_Date) :
-                new ObjectParameter("Tr_Date", typeof(string));
-    
-            var iD_SupplierParameter = iD_Supplier.HasValue ?
-                new ObjectParameter("ID_Supplier", iD_Supplier) :
-                new ObjectParameter("ID_Supplier", typeof(int));
-    
-            var type_DebitParameter = type_Debit.HasValue ?
-                new ObjectParameter("Type_Debit", type_Debit) :
-                new ObjectParameter("Type_Debit", typeof(bool));
-    
-            var total_AmountParameter = total_Amount.HasValue ?
-                new ObjectParameter("Total_Amount", total_Amount) :
-                new ObjectParameter("Total_Amount", typeof(decimal));
-    
-            var paid_UpParameter = paid_Up.HasValue ?
-                new ObjectParameter("Paid_Up", paid_Up) :
-                new ObjectParameter("Paid_Up", typeof(decimal));
-    
-            var to_be_PaidParameter = to_be_Paid.HasValue ?
-                new ObjectParameter("To_be_Paid", to_be_Paid) :
-                new ObjectParameter("To_be_Paid", typeof(decimal));
-    
-            var rEMARKSParameter = rEMARKS != null ?
-                new ObjectParameter("REMARKS", rEMARKS) :
-                new ObjectParameter("REMARKS", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("insert_Purchases_Master", tr_DateParameter, iD_SupplierParameter, type_DebitParameter, total_AmountParameter, paid_UpParameter, to_be_PaidParameter, rEMARKSParameter);
-        }
-    
-        public virtual int insert_Table_two_days()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("insert_Table_two_days");
-        }
-    
-        public virtual int IProc_CreateCompany(Nullable<int> comp)
-        {
-            var compParameter = comp.HasValue ?
-                new ObjectParameter("comp", comp) :
-                new ObjectParameter("comp", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("IProc_CreateCompany", compParameter);
-        }
-    
-        public virtual int New_Data_Bes()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("New_Data_Bes");
-        }
-    
-        public virtual ObjectResult<Stord_Get_Outlet_Result> Stord_Get_Outlet(string fromDate, string toDate, string uSER_CODE, Nullable<int> type)
+        public virtual ObjectResult<InvoiceList_Result> InvoiceList(string fromDate, string toDate, Nullable<int> type)
         {
             var fromDateParameter = fromDate != null ?
                 new ObjectParameter("FromDate", fromDate) :
@@ -576,75 +227,126 @@ namespace Inv.DAL.Domain
             var toDateParameter = toDate != null ?
                 new ObjectParameter("ToDate", toDate) :
                 new ObjectParameter("ToDate", typeof(string));
-    
-            var uSER_CODEParameter = uSER_CODE != null ?
-                new ObjectParameter("USER_CODE", uSER_CODE) :
-                new ObjectParameter("USER_CODE", typeof(string));
     
             var typeParameter = type.HasValue ?
                 new ObjectParameter("Type", type) :
                 new ObjectParameter("Type", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Stord_Get_Outlet_Result>("Stord_Get_Outlet", fromDateParameter, toDateParameter, uSER_CODEParameter, typeParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<InvoiceList_Result>("InvoiceList", fromDateParameter, toDateParameter, typeParameter);
         }
     
-        public virtual int update_SalesReturn(Nullable<int> pRODUCT_ID, Nullable<int> quantity_sell, Nullable<decimal> total_Price_One_Part, Nullable<int> iD_ORDER, string statusFlag)
+        public virtual ObjectResult<IProc_Rpt_Expense_Result> IProc_Rpt_Expense(Nullable<int> comp, Nullable<int> bra, string compNameA, string compNameE, string braNameA, string braNameE, string loginUser, Nullable<int> repType, Nullable<int> trType, string fromDate, string todate)
         {
-            var pRODUCT_IDParameter = pRODUCT_ID.HasValue ?
-                new ObjectParameter("PRODUCT_ID", pRODUCT_ID) :
-                new ObjectParameter("PRODUCT_ID", typeof(int));
+            var compParameter = comp.HasValue ?
+                new ObjectParameter("comp", comp) :
+                new ObjectParameter("comp", typeof(int));
     
-            var quantity_sellParameter = quantity_sell.HasValue ?
-                new ObjectParameter("Quantity_sell", quantity_sell) :
-                new ObjectParameter("Quantity_sell", typeof(int));
+            var braParameter = bra.HasValue ?
+                new ObjectParameter("bra", bra) :
+                new ObjectParameter("bra", typeof(int));
     
-            var total_Price_One_PartParameter = total_Price_One_Part.HasValue ?
-                new ObjectParameter("Total_Price_One_Part", total_Price_One_Part) :
-                new ObjectParameter("Total_Price_One_Part", typeof(decimal));
+            var compNameAParameter = compNameA != null ?
+                new ObjectParameter("CompNameA", compNameA) :
+                new ObjectParameter("CompNameA", typeof(string));
     
-            var iD_ORDERParameter = iD_ORDER.HasValue ?
-                new ObjectParameter("ID_ORDER", iD_ORDER) :
-                new ObjectParameter("ID_ORDER", typeof(int));
+            var compNameEParameter = compNameE != null ?
+                new ObjectParameter("CompNameE", compNameE) :
+                new ObjectParameter("CompNameE", typeof(string));
     
-            var statusFlagParameter = statusFlag != null ?
-                new ObjectParameter("StatusFlag", statusFlag) :
-                new ObjectParameter("StatusFlag", typeof(string));
+            var braNameAParameter = braNameA != null ?
+                new ObjectParameter("BraNameA", braNameA) :
+                new ObjectParameter("BraNameA", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("update_SalesReturn", pRODUCT_IDParameter, quantity_sellParameter, total_Price_One_PartParameter, iD_ORDERParameter, statusFlagParameter);
-        }
+            var braNameEParameter = braNameE != null ?
+                new ObjectParameter("BraNameE", braNameE) :
+                new ObjectParameter("BraNameE", typeof(string));
     
-        public virtual ObjectResult<Nullable<decimal>> update_Sales_Master(Nullable<decimal> total_All, string userName, Nullable<int> iD_ORDER)
-        {
-            var total_AllParameter = total_All.HasValue ?
-                new ObjectParameter("Total_All", total_All) :
-                new ObjectParameter("Total_All", typeof(decimal));
+            var loginUserParameter = loginUser != null ?
+                new ObjectParameter("LoginUser", loginUser) :
+                new ObjectParameter("LoginUser", typeof(string));
     
-            var userNameParameter = userName != null ?
-                new ObjectParameter("UserName", userName) :
-                new ObjectParameter("UserName", typeof(string));
+            var repTypeParameter = repType.HasValue ?
+                new ObjectParameter("RepType", repType) :
+                new ObjectParameter("RepType", typeof(int));
     
-            var iD_ORDERParameter = iD_ORDER.HasValue ?
-                new ObjectParameter("ID_ORDER", iD_ORDER) :
-                new ObjectParameter("ID_ORDER", typeof(int));
+            var trTypeParameter = trType.HasValue ?
+                new ObjectParameter("TrType", trType) :
+                new ObjectParameter("TrType", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("update_Sales_Master", total_AllParameter, userNameParameter, iD_ORDERParameter);
-        }
-    
-        public virtual ObjectResult<all_The_Gard_Result> all_The_Gard(string userName, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate)
-        {
-            var userNameParameter = userName != null ?
-                new ObjectParameter("UserName", userName) :
-                new ObjectParameter("UserName", typeof(string));
-    
-            var fromDateParameter = fromDate.HasValue ?
+            var fromDateParameter = fromDate != null ?
                 new ObjectParameter("FromDate", fromDate) :
-                new ObjectParameter("FromDate", typeof(System.DateTime));
+                new ObjectParameter("FromDate", typeof(string));
     
-            var toDateParameter = toDate.HasValue ?
-                new ObjectParameter("ToDate", toDate) :
-                new ObjectParameter("ToDate", typeof(System.DateTime));
+            var todateParameter = todate != null ?
+                new ObjectParameter("Todate", todate) :
+                new ObjectParameter("Todate", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<all_The_Gard_Result>("all_The_Gard", userNameParameter, fromDateParameter, toDateParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<IProc_Rpt_Expense_Result>("IProc_Rpt_Expense", compParameter, braParameter, compNameAParameter, compNameEParameter, braNameAParameter, braNameEParameter, loginUserParameter, repTypeParameter, trTypeParameter, fromDateParameter, todateParameter);
+        }
+    
+        public virtual ObjectResult<IProc_Rpt_ItemStockIncome_Result> IProc_Rpt_ItemStockIncome(Nullable<int> comp, Nullable<int> bra, string compNameA, string compNameE, string braNameA, string braNameE, string loginUser, Nullable<int> repType, Nullable<int> catID, Nullable<int> itemFamId, Nullable<int> itemID, Nullable<int> type, Nullable<int> status, string fromDate, string todate)
+        {
+            var compParameter = comp.HasValue ?
+                new ObjectParameter("comp", comp) :
+                new ObjectParameter("comp", typeof(int));
+    
+            var braParameter = bra.HasValue ?
+                new ObjectParameter("bra", bra) :
+                new ObjectParameter("bra", typeof(int));
+    
+            var compNameAParameter = compNameA != null ?
+                new ObjectParameter("CompNameA", compNameA) :
+                new ObjectParameter("CompNameA", typeof(string));
+    
+            var compNameEParameter = compNameE != null ?
+                new ObjectParameter("CompNameE", compNameE) :
+                new ObjectParameter("CompNameE", typeof(string));
+    
+            var braNameAParameter = braNameA != null ?
+                new ObjectParameter("BraNameA", braNameA) :
+                new ObjectParameter("BraNameA", typeof(string));
+    
+            var braNameEParameter = braNameE != null ?
+                new ObjectParameter("BraNameE", braNameE) :
+                new ObjectParameter("BraNameE", typeof(string));
+    
+            var loginUserParameter = loginUser != null ?
+                new ObjectParameter("LoginUser", loginUser) :
+                new ObjectParameter("LoginUser", typeof(string));
+    
+            var repTypeParameter = repType.HasValue ?
+                new ObjectParameter("RepType", repType) :
+                new ObjectParameter("RepType", typeof(int));
+    
+            var catIDParameter = catID.HasValue ?
+                new ObjectParameter("CatID", catID) :
+                new ObjectParameter("CatID", typeof(int));
+    
+            var itemFamIdParameter = itemFamId.HasValue ?
+                new ObjectParameter("ItemFamId", itemFamId) :
+                new ObjectParameter("ItemFamId", typeof(int));
+    
+            var itemIDParameter = itemID.HasValue ?
+                new ObjectParameter("ItemID", itemID) :
+                new ObjectParameter("ItemID", typeof(int));
+    
+            var typeParameter = type.HasValue ?
+                new ObjectParameter("type", type) :
+                new ObjectParameter("type", typeof(int));
+    
+            var statusParameter = status.HasValue ?
+                new ObjectParameter("status", status) :
+                new ObjectParameter("status", typeof(int));
+    
+            var fromDateParameter = fromDate != null ?
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(string));
+    
+            var todateParameter = todate != null ?
+                new ObjectParameter("Todate", todate) :
+                new ObjectParameter("Todate", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<IProc_Rpt_ItemStockIncome_Result>("IProc_Rpt_ItemStockIncome", compParameter, braParameter, compNameAParameter, compNameEParameter, braNameAParameter, braNameEParameter, loginUserParameter, repTypeParameter, catIDParameter, itemFamIdParameter, itemIDParameter, typeParameter, statusParameter, fromDateParameter, todateParameter);
         }
     }
 }

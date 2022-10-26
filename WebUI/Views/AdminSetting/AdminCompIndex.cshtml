@@ -56,11 +56,11 @@
         right: 2.9em;
     }
 </style>
-<div id="DivMassage" class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12  margingred  borderred display_none">
+<div id="DivMassage" class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12     borderred display_none">
     <h4 id="Text_Massage" style=""> رساله </h4>
 </div>
 
-<div id="divGrid" class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 margingred  borderred">
+<div id="divGrid" class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12    borderred">
     <label id="lepcompinformtion" class="col-lg-8 col-md-8 col-sm-8 col-xl-8 col-xs-8  labeltitel "><span id="spanlepcompinformtion" class="ifontowsam fa fa-caret-left"></span>بيانات الشركة  </label>
 
     <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2 float_left_right">
@@ -90,7 +90,7 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
                 <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 pading_2Processes2 ">  رقم الشركة</label>
                 <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
-                    <input type="text" class="form-control input-sm addable editable" name="COMP_CODE" id="txt_COMP_CODE">
+                    <input type="number" class="form-control input-sm addable editable" name="COMP_CODE" id="txt_COMP_CODE">
                 </div>
 
                 <label class="col-lg-1 col-md-2 col-sm-2 col-xl-2 col-xs-2 pading_2Processes2 text-end"> نشط</label>
@@ -156,7 +156,7 @@
             </div>
 
             <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
-                <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 pading_2Processes2 ">نوع المعرف	</label>
+                <label class="col-lg-2 col-md-1 col-sm-1 col-xl-1 col-xs-1 pading_2Processes2 ">نوع المعرف	</label>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xl-4 col-xs-4">
                     <select id="txt_IdType" class="form-control input-sm addable editable" name="VndIDTypeCode"></select>
                 </div>
@@ -306,7 +306,7 @@
                 </div>
                 <label class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 pading_2Processes2 text-end"> عدد الايميلات المسموح به يوميا  </label>
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
-                    <input type="text" class="form-control input-sm addable editable" name="EmailMaxDaily" id="txt_EmailMaxDaily">
+                    <input type="number" class="form-control input-sm addable editable" name="EmailMaxDaily" id="txt_EmailMaxDaily">
                 </div>
             </div>
 
@@ -368,16 +368,16 @@
     <div id="divsystem" class="col-lg-12  col-md-12 col-sm-12 col-xl-12 col-xs-12   ">
         <div class="col-lg-6 col-md-6 col-sm-6 col-xl-6 col-xs-6 border_gridCont">
             <div id="col-9" class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
-                <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 pading_2Processes2 ">ارسال ايميل</label>
+                @*<label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 pading_2Processes2 ">ارسال ايميل</label>
                 <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">
                     <input type="checkbox" class="checkbox" id="chk_sendEmail" />
                 </div>i
                 <label class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2 pading_2Processes2 text-end"> ارسال ايميل تسويقي   </label>
                 <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">
                     <input type="checkbox" class="checkbox" id="chk_sendshopEmail" />
-                </div>
+                </div>*@
                 <label class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2 pading_2Processes2 text-end">ارسال رسالة نصية</label>
-                <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">
+                <div class="col-lg-2 col-md-1 col-sm-1 col-xl-1 col-xs-1">
                     <input type="checkbox" class="checkbox" name="SendSMS" id="chk_SendSMS" />
                 </div>
                 <label class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2 pading_2Processes2 text-end">رسال SMS تسويقية</label>
@@ -392,17 +392,17 @@
                 </div>
                 <label class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2 pading_2Processes2 ">عدد ارقام الهوية</label>
                 <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
-                    <input type="text" class="form-control input-sm addable editable" name="IDLength" id="txt_IDLength">
+                    <input type="number" class="form-control input-sm addable editable" name="IDLength" id="txt_IDLength">
                 </div>
                 <label class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2 pading_2Processes2 ">الحد الأقصى للرسائل</label>
                 <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
-                    <input type="text" class="form-control input-sm addable editable" name="MaxYearlyMSGs" id="txt_MaxYearlyMSGs">
+                    <input type="number" class="form-control input-sm addable editable" name="MaxYearlyMSGs" id="txt_MaxYearlyMSGs">
                 </div>
             </div>
             <div id="col3_" class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
                 <label class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2 pading_2Processes2 ">عدد الرسائل المستعملة</label>
                 <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
-                    <input type="text" class="form-control input-sm addable editable" name="UsedMSGs" id="txt_UsedMSGs">
+                    <input type="number" class="form-control input-sm addable editable" name="UsedMSGs" id="txt_UsedMSGs">
                 </div>
                 <label class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2 pading_2Processes2 ">الثواني لتحديث الاشعار</label>
                 <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
@@ -429,13 +429,7 @@
         </div>
 
         <div class="col-lg-6 col-md-6 col-sm-6 col-xl-6 col-xs-6 border_gridCont ">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
-                <label class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2 pading_2Processes2 ">ضريبة القيمة المضافة</label>
-                <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">
-                    <input type="checkbox" name="IsVat" id="chk_IsVat" class="checkbox" />
-                </div>
-
-            </div>
+         
 
             <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
                 <label class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 pading_2Processes2 ">نوع الضريبة في المبيعات</label>
@@ -460,11 +454,11 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
                 <label class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 pading_2Processes2 ">مدة سريان الاشتراك الإضافية</label>
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
-                    <input type="text" class="form-control input-sm addable editable" name="MembershipAllanceDays" id="txt_MembershipAllanceDays">
+                    <input type="number" class="form-control input-sm addable editable" name="MembershipAllanceDays" id="txt_MembershipAllanceDays">
                 </div>
                 <label class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 pading_2Processes2 ">مدة الدخول للاطلاع</label>
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
-                    <input type="text" class="form-control input-sm addable editable" name="MembershipreadOnlyDays" id="txt_MembershipreadOnlyDays">
+                    <input type="number" class="form-control input-sm addable editable" name="MembershipreadOnlyDays" id="txt_MembershipreadOnlyDays">
                 </div>
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
@@ -499,54 +493,75 @@
                     <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">  </div>
                     <label class="col-lg-8 col-md-8 col-sm-8 col-xl-8 col-xs-8 pading_2Processes2 ">لا </label>
                 </div>
-
-            </div>
-
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
-                <label class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 pading_2Processes2 ">تسلسل القيود  شهريا</label>
-                <div class="col-lg-3 col-md-1 col-sm-1 col-xl-1 col-xs-1">
-                    <input name="GL_JournalMonthlyNo" id="txt_GL_JournalMonthlyNo" type="checkbox" class="checkbox" />
-                </div>
-                @*<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">
-                </div>*@
-                <label class="col-lg-3 col-md-2 col-sm-2 col-xl-2 col-xs-2 pading_2Processes2 ">عدد خانات التسلسل </label>
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
-                    <input type="text" class="form-control input-sm addable editable" name="GL_JournalMonthlyNoWidth" id="txt_GL_JournalMonthlyNoWidth">
-                </div>
+                @*<div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">*@
+                 
+                @*</div>*@
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
-                <label class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 pading_2Processes2 ">هل يقبل حفظ القيود الغير متوازنة</label>
+                <label class="col-lg-3 col-md-2 col-sm-2 col-xl-2 col-xs-2 pading_2Processes2 ">ضريبة القيمة المضافة</label>
                 <div class="col-lg-3 col-md-1 col-sm-1 col-xl-1 col-xs-1">
-                    <input name="GL_JournalSaveUnbalanced" id="chk_GL_JournalSaveUnbalanced" type="checkbox" class="checkbox" />
+                    <input type="checkbox" name="IsVat" id="chk_IsVat" class="checkbox" />
                 </div>
 
-                <label class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 pading_2Processes2 ">نوع القيد الافتتاحي</label>
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
-                    <select name="Gl_JournalOpenType" id="ddl_Gl_JournalOpenType" class="form-control input-sm addable editable"></select>
+                <label class="col-lg-4 col-md-3 col-sm-3 col-xl-3 col-xs-3 pading_2Processes2 ">هل يتم ادراج العملاء و الموردين في الحسابات</label>
+                <div class="col-lg-2 col-md-1 col-sm-1 col-xl-1 col-xs-1">
+                    <input type="checkbox" class="checkbox" name="ISCustVendorInGL" id="chk_ISCustVendorInGL" />
+                    </div>
+             
+                    </div>
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+                        <label class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 pading_2Processes2 ">تسلسل القيود  شهريا</label>
+                        <div class="col-lg-3 col-md-1 col-sm-1 col-xl-1 col-xs-1">
+                            <input name="GL_JournalMonthlyNo" id="txt_GL_JournalMonthlyNo" type="checkbox" class="checkbox" />
+                        </div>
+                        @*<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">
+            </div>*@
+                        <label class="col-lg-3 col-md-2 col-sm-2 col-xl-2 col-xs-2 pading_2Processes2 ">عدد خانات التسلسل </label>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
+                            <input type="number" class="form-control input-sm addable editable" name="GL_JournalMonthlyNoWidth" id="txt_GL_JournalMonthlyNoWidth">
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+                        <label class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 pading_2Processes2 ">هل يقبل حفظ القيود الغير متوازنة</label>
+                        <div class="col-lg-3 col-md-1 col-sm-1 col-xl-1 col-xs-1">
+                            <input name="GL_JournalSaveUnbalanced" id="chk_GL_JournalSaveUnbalanced" type="checkbox" class="checkbox" />
+                        </div>
+
+                        <label class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 pading_2Processes2 ">نوع القيد الافتتاحي</label>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
+                            <select name="Gl_JournalOpenType" id="ddl_Gl_JournalOpenType" class="form-control input-sm addable editable"></select>
+                        </div>
+
+                    </div>
+
+
                 </div>
-
-            </div>
-
-
-        </div>
 
         <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 border_gridCont ">
-            <label id="" class="col-lg-8 col-md-8 col-sm-8 col-xl-8 col-xs-8  labeltitel "><span id="" class="ifontowsam fa fa-caret-left"></span> العملاء علي مستوي الفرع</label>
+            <label id="" class="col-lg-8 col-md-8 col-sm-8 col-xl-8 col-xs-8  labeltitel "><span id="" class="ifontowsam fa fa-caret-left"></span>اعدادات الفواتير</label>
 
             <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
-                <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 pading_2Processes2 ">نوع الفاتورة	</label>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+                @*<label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 pading_2Processes2 ">نوع الفاتورة	</label>
                 <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
                     <select name="InvoiceTypeCode" id="ddl_InvoiceTypeCode" class="form-control input-sm addable editable"></select>
                 </div>
                 <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 pading_2Processes2 text-end ">نوع حركة الفاتورة	</label>
                 <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
                     <select name="InvoiceTransCode" id="ddl_InvoiceTransCode" class="form-control input-sm addable editable"></select>
-                </div>
-                <label class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2 pading_2Processes2 text-end">كلمة سر السماح بالبيع بأقل من حد السعر</label>
+                </div>*@
+                <label class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2 pading_2Processes2 ">كلمة سر السماح بالبيع بأقل من حد السعر</label>
                 <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
                     <input type="text" class="form-control input-sm addable editable" name="ExceedMinPricePassword" id="txt_ExceedMinPricePassword">
                 </div>
 
+                  <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 pading_2Processes2 ">مسار حفظ الفواتير</label>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                    <input type="text" class="form-control input-sm addable editable" name="DocPDFFolder" id="txt_DocPDFFolder" />
+                </div>
+
+            </div>
             </div>
             <div id="checkbox_" class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
                 <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
@@ -558,37 +573,53 @@
                     <label class="col-lg-7 col-md-7 col-sm-7 col-xl-7 col-xs-7 pading_2Processes2 ">تعديل تاريخ الفاتورة</label>
                     <input type="checkbox" class="checkbox" name="IvoiceDateEditable" id="chk_IvoiceDateEditable" />
                 </div>
-                <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
-                    <label class="col-lg-7 col-md-7 col-sm-7 col-xl-7 col-xs-7 pading_2Processes2 ">اصدار فاتورة بدون عميل</label>
-                    <input type="checkbox" class="checkbox" name="InvoiceWithoutCust" id="chk_InvoiceWithoutCust" />
-                </div>
+                @*<div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+            <label class="col-lg-7 col-md-7 col-sm-7 col-xl-7 col-xs-7 pading_2Processes2 ">اصدار فاتورة بدون عميل</label>
+            <input type="checkbox" class="checkbox" name="InvoiceWithoutCust" id="chk_InvoiceWithoutCust" />
+        </div>*@
+
+
                 <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
                     <label class="col-xs-8 pading_2Processes2 ">خصم علي الصنف في الفاتورة</label>
                     <input type="checkbox" class="checkbox" name="InvoiceLineDiscount" id="chk_InvoiceLineDiscount" />
                 </div>
-                <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
-                    <label class="col-xs-8 pading_2Processes2 ">حسم علي الصنف في الفاتورة</label>
-                    <input type="checkbox" class="checkbox" name="InvoiceLineAllowance" id="chk_InvoiceLineAllowance" />
+
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
+                    <label class="col-lg-7 col-md-7 col-sm-7 col-xl-7 col-xs-7 pading_2Processes2 ">السعر متضمن الضريبة في الاصناف</label>
+                    <input type="checkbox" class="checkbox" name="SalesPriceWithVAT" id="chk_SalesPriceWithVAT" />
                 </div>
-                <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
-                    <label class="col-lg-7 col-md-7 col-sm-7 col-xl-7 col-xs-7 pading_2Processes2 ">خصم علي الفاتورة</label>
-                    <input type="checkbox" class="checkbox" name="InvoiceTotalAllowance" id="chk_InvoiceTotalAllowance" />
-                </div>
-                
+
+                @*<div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+            <label class="col-lg-7 col-md-7 col-sm-7 col-xl-7 col-xs-7 pading_2Processes2 ">خصم علي الفاتورة</label>
+            <input type="checkbox" class="checkbox" name="InvoiceTotalAllowance" id="chk_InvoiceTotalAllowance" />
+        </div>*@
+
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
                 <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
                     <label class="col-lg-7 col-md-7 col-sm-7 col-xl-7 col-xs-7 pading_2Processes2 ">إضافات علي الفاتورة</label>
                     <input type="checkbox" class="checkbox" name="InvoiceTotalCharge" id="chk_InvoiceTotalCharge" />
                 </div>
+
+
                 <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                    <label class="col-lg-7 col-md-7 col-sm-7 col-xl-7 col-xs-7 pading_2Processes2 ">خصم علي الفاتورة</label>
+                    <input type="checkbox" class="checkbox" name="InvoiceTotalAllowance" id="chk_InvoiceTotalAllowance" />
+                </div>
+
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                    <label class="col-xs-8 pading_2Processes2 ">حسم علي الصنف في الفاتورة</label>
+                    <input type="checkbox" class="checkbox" name="InvoiceLineAllowance" id="chk_InvoiceLineAllowance" />
+                </div>
+                @*<label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 pading_2Processes2 ">مسار حفظ الفواتير</label>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+            <input type="text" class="form-control input-sm addable editable" name="DocPDFFolder" id="txt_DocPDFFolder" />
+        </div>*@
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
                     <label class="col-lg-7 col-md-7 col-sm-7 col-xl-7 col-xs-7 pading_2Processes2 ">السعر متضمن الضريبة في العمليات</label>
                     <input type="checkbox" class="checkbox" name="OperationPriceWithVAT" id="chk_OperationPriceWithVAT" />
                 </div>
-                <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
-                    <label class="col-lg-7 col-md-7 col-sm-7 col-xl-7 col-xs-7 pading_2Processes2 ">السعر متضمن الضريبة في الاصناف</label>
-                    <input type="checkbox" class="checkbox" name="SalesPriceWithVAT" id="chk_SalesPriceWithVAT" />
-                </div>
+
             </div>
 
         </div>

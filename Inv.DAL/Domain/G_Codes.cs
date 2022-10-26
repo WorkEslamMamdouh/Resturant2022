@@ -19,8 +19,8 @@ namespace Inv.DAL.Domain
         public Nullable<int> CodeValue { get; set; }
         public string DescA { get; set; }
         public string DescE { get; set; }
+        public string StdCode { get; set; }
         public string SubCode { get; set; }
         public string Remarks { get; set; }
-        public string StdCode { get; set; }
     }
 }

@@ -17,11 +17,12 @@ namespace Inv.DAL.Domain
         public int COMP_CODE { get; set; }
         public int BRA_CODE { get; set; }
         public string BRA_DESC { get; set; }
-        public Nullable<byte> BRA_TYPE { get; set; }
+        public string BRA_TYPE { get; set; }
         public string BRA_DESCL { get; set; }
         public string BRA_SHORTA { get; set; }
         public string BRA_SHORTL { get; set; }
         public string REGION_CODE { get; set; }
+        public string BRA_DESCE { get; set; }
         public string City { get; set; }
         public string Address { get; set; }
         public string Tel { get; set; }
@@ -42,7 +43,6 @@ namespace Inv.DAL.Domain
         public Nullable<decimal> CUSTOMNUM1 { get; set; }
         public Nullable<decimal> CUSTOMNUM2 { get; set; }
         public Nullable<System.DateTime> CUSTOMDATE { get; set; }
-        public string BRA_DESCE { get; set; }
         public string GroupVatNo { get; set; }
         public Nullable<int> VndIDTypeCode { get; set; }
         public string IDNo { get; set; }
@@ -56,5 +56,8 @@ namespace Inv.DAL.Domain
         public string Address_District { get; set; }
         public Nullable<int> NationalityID { get; set; }
         public Nullable<int> Currencyid { get; set; }
+        public Nullable<int> InvoiceTypeCode { get; set; }
+        public Nullable<int> ReturnTypeCode { get; set; }
+        public Nullable<int> InvoiceTransCode { get; set; }
     }
 }

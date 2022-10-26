@@ -550,8 +550,8 @@ namespace Inv.API.Controllers
             {
                 var comp = new SystemParameters();
                 comp.CompanyCode = company.COMP_CODE.ToString();
-                comp.CompanyNameA = company.NameA;//)SecuritySystem.Decrypt(company.NameA);
-                comp.CompanyNameE = company.NameE;//)SecuritySystem.Decrypt(company.NameE);
+                comp.CompanyNameA = company.NameA;
+                comp.CompanyNameE = company.NameE;
                 comp.IsActive = Convert.ToBoolean(company.IsActive);
                 companiesList.Add(comp);
             };
@@ -613,24 +613,24 @@ namespace Inv.API.Controllers
 
         }
 
-        //[HttpGet]
-        //public IHttpActionResult GetNotifications(int comCode, int BraCode,int yearid ,  string SystemCode, string SubSystemCode)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        var not = db.G_Noteifications.Where(x => x.SYSTEM_CODE == SystemCode); // && x.SUB_SYSTEM_CODE == SubSystemCode
-        //        var notCom = db.G_NotificationCompany.Where(x => x.SYSTEM_CODE == SystemCode && x.FIN_YEAR == yearid && x.CompCode == comCode && x.BranchCode == BraCode); // && x.SUB_SYSTEM_CODE == SubSystemCode
+        [HttpGet]
+        public IHttpActionResult GetNotifications(int comCode, int BraCode,int yearid ,  string SystemCode, string SubSystemCode)
+        {
+            if (ModelState.IsValid)
+            {
+                var not = db.G_Noteifications.Where(x => x.SYSTEM_CODE == SystemCode); // && x.SUB_SYSTEM_CODE == SubSystemCode
+                var notCom = db.G_NotificationCompany.Where(x => x.SYSTEM_CODE == SystemCode && x.FIN_YEAR == yearid && x.CompCode == comCode && x.BranchCode == BraCode); // && x.SUB_SYSTEM_CODE == SubSystemCode
 
-        //        var res = (from nt in not
-        //                   join ntc in notCom on nt.MODULE_CODE equals ntc.MODULE_CODE
-        //                   where nt.ISActive == true && ntc.ISActive == true
-        //                   select new { nt.MODULE_CODE, nt.MODULE_DESCA, nt.MODULE_DESCE, ntc.NoteCount, nt.DisplayOrder }).OrderBy(x => x.DisplayOrder).ToList();
+                var res = (from nt in not
+                           join ntc in notCom on nt.MODULE_CODE equals ntc.MODULE_CODE
+                           where nt.ISActive == true && ntc.ISActive == true
+                           select new { nt.MODULE_CODE, nt.MODULE_DESCA, nt.MODULE_DESCE, ntc.NoteCount, nt.DisplayOrder }).OrderBy(x => x.DisplayOrder).ToList();
 
-        //        return Ok(res);
-        //    }
-        //    return BadRequest(ModelState);
+                return Ok(res);
+            }
+            return BadRequest(ModelState);
  
-        //}
+        }
 
         [HttpGet]
         public IHttpActionResult UpdateNotificationAndSndMsg(int comCode, int BraCode, string SystemCode, string SubSystemCode)

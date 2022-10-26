@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Inv.DAL</RootNamespace>
     <AssemblyName>Inv.DAL</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -50,49 +51,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Domain\all_The_Gard_Result.cs">
+    <Compile Include="Domain\A_D_VAT_TYPE.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Domain\Catch_Receipt.cs">
+    <Compile Include="Domain\A_PERIOD.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Domain\CATEGRE.cs">
+    <Compile Include="Domain\Customer.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Domain\CUSTOMER.cs">
-      <DependentUpon>InvModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Domain\EMPLOYEE.cs">
-      <DependentUpon>InvModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Domain\Enter_Money.cs">
-      <DependentUpon>InvModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Domain\familly_Cat.cs">
-      <DependentUpon>InvModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Domain\Get_Settings_Report_and_Parameter_Result.cs">
-      <DependentUpon>InvModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Domain\Get_Settings_Report_Result.cs">
-      <DependentUpon>InvModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Domain\GFunc_GetPrivilageOld_Result.cs">
-      <DependentUpon>InvModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Domain\GFunc_GetPrivilageRole_Result.cs">
-      <DependentUpon>InvModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Domain\GFunc_GetPrivilageUM_Result.cs">
-      <DependentUpon>InvModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Domain\GFunc_GetPrivilage_Result.cs">
+    <Compile Include="Domain\Expense.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Domain\GFun_Companies_Result.cs">
-      <DependentUpon>InvModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Domain\GFun_UserCompanyBranch_Result.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Domain\GQ_GetUserBarnchAccess.cs">
@@ -101,13 +72,7 @@
     <Compile Include="Domain\GQ_GetUserBranch.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Domain\GQ_GetUserModule.cs">
-      <DependentUpon>InvModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Domain\GQ_GetUserRole.cs">
-      <DependentUpon>InvModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Domain\GQ_GetUsers.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Domain\GQ_Notifications.cs">
@@ -146,6 +111,12 @@
     <Compile Include="Domain\G_MODULES.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Domain\G_Nationality.cs">
+      <DependentUpon>InvModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\G_News.cs">
+      <DependentUpon>InvModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Domain\G_Noteifications.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
@@ -159,6 +130,9 @@
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Domain\G_REGION_BRANCH.cs">
+      <DependentUpon>InvModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\G_ReportWebSetting.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Domain\G_Role.cs">
@@ -177,6 +151,9 @@
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Domain\G_SearchFormSetting.cs">
+      <DependentUpon>InvModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\G_STORE.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Domain\G_SUB_SYSTEMS.cs">
@@ -203,6 +180,9 @@
     <Compile Include="Domain\G_USER_LOG.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Domain\G_VatNature.cs">
+      <DependentUpon>InvModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Domain\HIJRA_CONVERT.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
@@ -222,65 +202,65 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>InvModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Domain\IQ_Catch_Receipt.cs">
+    <Compile Include="Domain\InvoiceList_Result.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Domain\IQ_Outlet.cs">
+    <Compile Include="Domain\IProc_Rpt_Expense_Result.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Domain\IQ_Purchases_Details.cs">
+    <Compile Include="Domain\IProc_Rpt_ItemStockIncome_Result.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Domain\IQ_Purchases_Master.cs">
+    <Compile Include="Domain\IQ_GetItemStoreInfo.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Domain\I_Control.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Domain\I_D_Category.cs">
+      <DependentUpon>InvModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\I_D_CURRENCY.cs">
+      <DependentUpon>InvModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\I_D_UnitGroup.cs">
+      <DependentUpon>InvModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\I_D_UnitGroupUom1.cs">
+      <DependentUpon>InvModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\I_D_UOM.cs">
+      <DependentUpon>InvModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\I_Item.cs">
+      <DependentUpon>InvModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\I_ItemFamily.cs">
+      <DependentUpon>InvModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\I_ItemStore.cs">
+      <DependentUpon>InvModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\I_ItemYear.cs">
+      <DependentUpon>InvModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\I_ItemYearUom.cs">
+      <DependentUpon>InvModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\I_Sls_TR_Invoice.cs">
+      <DependentUpon>InvModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\I_Sls_TR_InvoiceItems.cs">
+      <DependentUpon>InvModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Domain\I_VW_GetCompStatus.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Domain\ORDER_DELIVERY.cs">
-      <DependentUpon>InvModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Domain\Outlet.cs">
-      <DependentUpon>InvModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Domain\PartialClass.cs" />
-    <Compile Include="Domain\PRODUCT.cs">
+    <Compile Include="Domain\Prnt_Quotation_Result.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Domain\Purchases_Details.cs">
-      <DependentUpon>InvModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Domain\Purchases_Master.cs">
-      <DependentUpon>InvModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Domain\Report_Parameters.cs">
-      <DependentUpon>InvModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Domain\ReviewSalesItemInfo.cs">
-      <DependentUpon>InvModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Domain\ReviewSalesMaster.cs">
-      <DependentUpon>InvModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Domain\Settings_Report.cs">
-      <DependentUpon>InvModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Domain\Stok_ORDER_DELIVERY.cs">
-      <DependentUpon>InvModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Domain\Stord_Get_Outlet_Result.cs">
-      <DependentUpon>InvModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Domain\Supplier.cs">
-      <DependentUpon>InvModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Domain\Table_two_days.cs">
-      <DependentUpon>InvModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Domain\The_Gard.cs">
+    <Compile Include="Domain\Salesman.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

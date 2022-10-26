@@ -58,5 +58,6 @@ namespace Inv.DAL.Domain
         public Nullable<bool> OperationPriceWithVAT { get; set; }
         public Nullable<bool> SalesPriceWithVAT { get; set; }
         public string DocPDFFolder { get; set; }
+        public Nullable<bool> ISCustVendorInGL { get; set; }
     }
 }

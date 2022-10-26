@@ -97,89 +97,46 @@ namespace Inv.WebUI.Controllers
         }
 
         #region Open Pages 
-
-
-
-        public ActionResult USERSIndex()
+ 
+        public ActionResult QuotationIndex()
         {
-            return View("~/Views/Tools/USERS/USERSIndex.cshtml");
-        }
-        public ActionResult AdminBarIndex()
-        {
-            return View("~/Views/AdminSetting/AdminBarIndex.cshtml");
-        }
-        public ActionResult ClientaccstatIndex()
-        {
-            return View("~/Views/CollectionReports/ClientaccstatIndex.cshtml");
-        }
-
-        public ActionResult AdminCompIndex()
-        {
-            return View("~/Views/AdminSetting/AdminCompIndex.cshtml");
-        }
-
-
-
-
-
-
-        public ActionResult SlsTrSalesIndex()
-        {
-            return View("~/Views/Sales/SlsTrSalesIndex.cshtml");
-        }
-        public ActionResult SlsTrReturnIndex()
-        {
-            return View("~/Views/Sales/SlsTrReturnIndex.cshtml");
-        }
-        public ActionResult SlsTrSalesManagerIndex()
-        {
-            return View("~/Views/Sale/SlsTrSalesManagerIndex.cshtml");
-        }
-        public ActionResult PurchasesIndex()
-        {
-            return View("~/Views/Purchases/PurchasesIndex.cshtml");
-        }
-
-        public ActionResult CategoriesIndex()
-        {
-            return View("~/Views/Stock/CategoriesIndex.cshtml");
-        }
-
-
-        public ActionResult ItemsIndex()
-        {
-            return View("~/Views/Stock/ItemsIndex.cshtml");
-        }
-        public ActionResult familly_CatIndex()
-        {
-
-            return View("~/Views/Stock/familly_Cat.cshtml");
-        }
-        public ActionResult SupplierIndex()
-        {
-            return View("~/Views/Generalsetting/SupplierIndex.cshtml");
-        }
-        public ActionResult CUSTOMERSIndex()
-        {
-            return View("~/Views/Generalsetting/CUSTOMERSIndex.cshtml");
-        }
-        public ActionResult Catch_ReceiptIndex()
-        {
-            return View("~/Views/Generalsetting/Catch_ReceiptIndex.cshtml");
+            return View("~/Views/Quotation/QuotationIndex.cshtml");
         } 
-        public ActionResult SalesinventoryIndex()
+        public ActionResult ReportsIndex()
         {
-
-            return View("~/Views/Report/Salesinventory.cshtml");
-        }
-        public ActionResult Income_expensesIndex()
-        {
-
-            return View("~/Views/Report/Income_expenses.cshtml");
+            return View("~/Views/Report/ReportsIndex.cshtml");
         }
 
+        public ActionResult QuotationViewIndex()
+        {
+            return View("~/Views/Quotation/QuotationViewIndex.cshtml");
+        }
+        public ActionResult StockDefIndex()
+        {
+            return View("~/Views/StockDef/StockDefIndex.cshtml");
+        }
 
+        public ActionResult CompaniesIndex()
+        {
+            return View("~/Views/Customer/CustomerIndex.cshtml");
+        }
 
+        public ActionResult TestIndex()
+        {
+            return View("~/Views/Customer/TestIndex.cshtml");
+        }
+
+        public ActionResult UsersIndex()
+        {
+            return View("~/Views/USERS/USERSIndex.cshtml");
+        }  
+        
+  
+
+        public ActionResult ReportsPopup()
+        {
+            return View("~/Views/Partial/ReportsPopup.cshtml");
+        }
 
         #endregion  Open Pages 
 

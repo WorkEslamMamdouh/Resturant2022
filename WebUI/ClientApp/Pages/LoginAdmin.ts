@@ -23,7 +23,7 @@ var LoginComponent;
 
     var compData = Array();
     var SystemEnv: SystemEnvironment = new SystemEnvironment();
-    var SysSession: SystemSession = GetSystemSession();
+    var SysSession: SystemSession = GetSystemSession('Home');
 
     function InitalizeComponent() {
         txtUserName = document.getElementById("txtUserName");

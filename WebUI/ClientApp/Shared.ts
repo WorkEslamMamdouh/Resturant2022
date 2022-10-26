@@ -204,43 +204,37 @@ class SystemEnvironment {
     public ModuleCode: string;
     public IsBiLingual?: any;
     public Token: string;
+
     public IsNotificaitonActive: boolean; 
     public IsDashboardActive: boolean;     
     public StartDate: string;     
     public EndDate: string;     
-    public ActionLastDate: string;     
-    public SysTimeOut: number;
-    public NationalityID: number;
-    public Currencyid: number;
     public InvoiceTypeCode: number;
-    public InvoiceTransCode: number;
-    public GL_VoucherCCDT_Type: number;
-    public InvoiceWithoutCust: boolean;
-    public IvoiceDateEditable: boolean;
-    public InvoiceLineDiscount: boolean;
-    public InvoiceLineAllowance: boolean;
-    public InvoiceTotalAllowance: boolean;
-    public InvoiceTotalCharge: boolean;
-    public OperationPriceWithVAT: boolean;
-    public SalesPriceWithVAT: boolean;
-    public IsLocalBranchCustomer: boolean;
+    public RetailInvoiceTransCode: number;
+    //public ActionLastDate: string;     
+    //public SysTimeOut: number;
+    public NationalityID: number;
+    public Currencyid: number;  
+    public ReturnTypeCode: number;
+    public SlsInvType: number; 
+    public WholeInvoiceTransCode: number;
+    public RetailInvoicePayment: number;
+    public WholeInvoicePayment: number;
+    public ServiceInvoiceTransCode: number;
+
+
   
-     }
-class sysInternal_Comm {
-    public static Source: string;
-    public static Destination: string;
-    public static IdList: Array<number>;
-    public static MsgID: number;
-    public static ImgType: string;
-    public static IsSiglePicture: boolean; // 
-    public static PicOwnerID: number;   // Tr No image id 
-    public static IsUploadPic: boolean;   // if true used can upload 
-    public static IsdownloadPic: boolean;  // user can download 
-    public static IsAutoSave: boolean;  // user can download 
-    
-    public static MsgReplyID: number;
-    public static slected_MemberID: number = 0;
-    public static period_ID: number = 0;
+}
+
+ class sysInternal_Comm {
+    public static Branch: string;
+    public static Company: string;   
+    public static Storeid: number;
+    public static Descr: string;
+    public static Code: string; // 
+    public static Mode: number;   //1 retail , 2 wholesale , 3 : purchase  4 stock 
+     public static VatNatID: number = 0;
+     public static Itemid: number = 0;
 }
 
 
@@ -320,6 +314,9 @@ function GetSystemEnvironment(): SystemEnvironment {
 
 }
 
+
+
+
 //function GetI_Control(): I_Control {
 
 //    if (document.cookie.length > 0) {
@@ -332,17 +329,66 @@ function GetSystemEnvironment(): SystemEnvironment {
 //    }
 //}
 
-function GetSystemSession(): SystemSession {
+//function GetSystemSession(): SystemSession {
+//    if (document.cookie.length > 0) {
+//        // 
+//        var SysSession = new SystemSession;
+//        SysSession.CurrentEnvironment = JSON.parse(readCookie("Inv1_systemProperties")) as SystemEnvironment;
+//        SysSession.CurrentPrivileges = JSON.parse(readCookie("Inv1_Privilage")) as UserPrivilege;
+//        //RS.CurrentMemberComm = JSON.parse(getCookie("Inv1_Comm")) as Kids_Comm;
+//        return SysSession;
+//    }
+//}
+
+
+function GetSystemSession(Mod: string): SystemSession {
     if (document.cookie.length > 0) {
-        // 
+         
         var SysSession = new SystemSession;
         SysSession.CurrentEnvironment = JSON.parse(readCookie("Inv1_systemProperties")) as SystemEnvironment;
-        SysSession.CurrentPrivileges = JSON.parse(readCookie("Inv1_Privilage")) as UserPrivilege;
-        //RS.CurrentMemberComm = JSON.parse(getCookie("Inv1_Comm")) as Kids_Comm;
+        if (Mod == "Home")
+            return SysSession;
+
+        var sys: SystemTools = new SystemTools();
+       
+        let compCode = SysSession.CurrentEnvironment.CompCode;
+        if (!(compCode == "Undefied") ) {
+
+
+            let branchCode = SysSession.CurrentEnvironment.BranchCode;
+            let UserCode = SysSession.CurrentEnvironment.UserCode;
+            let SystemCode = SysSession.CurrentEnvironment.SystemCode;
+            let SubSystemCode = SysSession.CurrentEnvironment.SubSystemCode;
+            let CurrentYear = SysSession.CurrentEnvironment.CurrentYear;
+            //var apiUrl = $("#GetAPIUrl").val() + "SystemTools" + "/" + "GetUserPrivilage";
+
+            Ajax.Callsync({
+                type: "GET",
+                url: sys.apiUrl("SystemTools", "GetUserPrivilage"),
+                data: { year: Number(CurrentYear), compCode: Number(compCode), branchCode: Number(branchCode), UserCode: UserCode, SystemCode: SystemCode, Modulecode: Mod },
+                success: (d) => {
+          
+                    let result = JSON.parse(d) as UserPrivilege;
+                   
+                    if (result == null || result.Access != true) {
+                        MessageBox.Show("Access denied", Mod);
+                        return;
+                    }
+                    if (result.Access == true) {
+                        debugger
+                        $("#btnHelpRep").click(() => { ScreenHelp(Mod); })    
+                        SysSession.CurrentPrivileges = result;
+
+                    }
+                    else {
+                        MessageBox.Show("No Inv1_Privilage", Mod);
+                    }
+                }
+            });
+        }
         return SysSession;
     }
 }
-
 //function GetMemberComm(): Kids_Comm {
 //    if (document.cookie.length > 0) {
 //        // 

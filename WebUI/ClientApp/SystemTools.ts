@@ -1,11 +1,13 @@
-﻿class SystemTools {
+﻿/// <reference path="poupitems/poupitems.ts" />
+/// <reference path="poupitems/poupitems.ts" />
+class SystemTools {
     constructor() {
         this.orgCondition = "";
-        this.SysSession = GetSystemSession();
+        this.SysSession = GetSystemSession('Home');
     }
 
     public orgCondition: string;
-    public SysSession: SystemSession; 
+    public SysSession: SystemSession;
 
     public apiUrl(controller: string, action: string) {
 
@@ -15,7 +17,7 @@
     }
 
     public getJsonData(model: any, type: string = ""): any {
-         
+
         switch (type) {
 
             case "Insert":
@@ -84,7 +86,7 @@
 
     private SwitchFavoriteIcon() {
         //imgFavUrl
-         
+
         if (sessionStorage.getItem("MODU_CODE") == null) {
             sessionStorage.setItem("imgFavUrl", "../images/favourit.gif");
             return;
@@ -108,7 +110,7 @@
         let UserCode = this.SysSession.CurrentEnvironment.UserCode;
         let Modulecode = this.SysSession.CurrentPrivileges.MODULE_CODE;
         let SubSystemCode = this.SysSession.CurrentEnvironment.SubSystemCode;
-         
+
         Ajax.CallAsync({
             type: "GET",
             url: this.apiUrl("SystemTools", "SwitchUserFavorite"),
@@ -121,7 +123,7 @@
     }
 
     public FindKey(moduleCode: string, _SearchControlName: string, Condition: string, OnSearchSelected: () => void) {
-         
+
         this.orgCondition = Condition;
 
         let SystemCode = this.SysSession.CurrentEnvironment.SystemCode;
@@ -139,7 +141,7 @@
             },
             async: true,
             success: (resp) => {
-                 
+
                 var response = resp;
                 if (response == null) {
                     MessageBox.Show("Search not available, Please call your app administrator", "Search");
@@ -165,16 +167,19 @@
                 let boxHeight: string = settings.Height <= 100 ? "80%" : settings.Height.toString() + "px";
                 let boxLeft: string = settings.Left <= 50 ? "5%" : settings.Left.toString() + "px";
                 let boxTop: string = settings.Top <= 50 ? "10%" : settings.Top.toString() + "px";
-                 
+
                 $("#SearchBox").css("width", boxWidth);
                 $("#SearchBox").css("height", boxHeight);
                 $("#SearchBox").css("left", boxLeft);
                 $("#SearchBox").css("top", boxTop);
-
+              
                 SearchGrid.SearchDataGrid.Bind();
+        
 
                 SearchGrid.SearchDataGrid.OnDoubleClick = () => {
+           
                     console.log(SearchGrid.SearchDataGrid.SelectedKey);
+                 
                     $("#SearchBox").modal("hide");//.css("display", "none");
                     OnSearchSelected();
                 };
@@ -203,76 +208,8 @@
             }
         });
     }
-    //old code
-    //public FindNotification(moduleCode: string, _SearchControlName: string, Condition: string, OnSearchSelected: () => void) {
-    //    this.orgCondition = Condition;
 
-    //    Ajax.CallAsync({
-    //        url: Url.Action("Find", "ClientTools"),
-    //        data: {
-    //            moduleCode: moduleCode,
-    //            Condition: Condition,
-    //            controlName: _SearchControlName//$("#SearchControlName").val()
-    //        },
-    //        async: true,
-    //        success: (resp) => {
-    //            var response = resp.result;
-    //            if (response == null) {
-    //                MessageBox.Show("Search not available, Please call your app administrator", "Search");
-    //                return;
-    //            }
-
-    //            let columns = response.Columns as Array<datatableColumn>;
-    //            let result = JSON.parse(response.DataResult);
-
-    //            let settings = response.Settings as G_SearchForm;
-    //            let TableName = response.TableName as string;
-    //            let Condition = response.Condition as string;
-
-    //            SearchGrid.SearchDataGrid = new DataTable();
-    //            SearchGrid.SearchDataGrid.Columns = columns;
-
-    //            SearchGrid.SearchDataGrid.dataScr = result;
-    //            SearchGrid.SearchDataGrid.ElementName = "SearchDataTable";
-    //            SearchGrid.SearchDataGrid.PageSize = settings.PageSize;// < 50 ? 50 : settings.PageSize;
-    //            SearchGrid.SearchDataGrid.PrimaryKey = settings.ReturnDataPropertyName; //"RowIndex";
-
-    //            let boxWidth: string = settings.Width <= 100 ? "70%" : settings.Width.toString() + "px";
-    //            let boxHeight: string = settings.Height <= 100 ? "50%" : settings.Height.toString() + "px";
-    //            let boxLeft: string = settings.Left <= 50 ? "14%" : settings.Left.toString() + "px";
-    //            let boxTop: string = settings.Top <= 50 ? "10%" : settings.Top.toString() + "px";
-
-    //            $("#SearchBox").css("width", boxWidth);
-    //            $("#SearchBox").css("height", boxHeight);
-    //            $("#SearchBox").css("left", boxLeft);
-    //            $("#SearchBox").css("top", boxTop);
-
-    //            SearchGrid.SearchDataGrid.Bind();
-
-
-
-    //            try {
-    //                if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
-    //                    document.getElementById("searchTitle").innerText = settings.SerachFormTitleA;
-    //                }
-    //                else if (SysSession.CurrentEnvironment.ScreenLanguage == "en") {
-    //                    document.getElementById("searchTitle").innerText = settings.SerachFormTitle;
-    //                }
-    //            } catch (e) {
-    //                console.log('error in language...');
-    //            }
-
-    //            $(".ui-igedit-input").keyup((e) => {
-
-    //            });
-
-    //            $("#SearchBox").modal("show");//.css("display", "");//
-    //            $("#SearchDataTable").css("width", "100%");
-    //            $("#SearchDataTable").css("height", "100%");
-    //        }
-    //    });
-    //}
-    //new code//
+    
     public FindNotification(moduleCode: string, _SearchControlName: string, Condition: string, OnSearchSelected: () => void) {
         this.orgCondition = Condition;
 

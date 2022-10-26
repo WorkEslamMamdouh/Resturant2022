@@ -22,7 +22,7 @@ var LoginComponent;
     var vSysTimeOut = " 30";
     var compData = Array();
     var SystemEnv = new SystemEnvironment();
-    var SysSession = GetSystemSession();
+    var SysSession = GetSystemSession('Home');
     function InitalizeComponent() {
         txtUserName = document.getElementById("txtUserName");
         txtUserPassword = document.getElementById("txtUserPassword");
@@ -43,6 +43,9 @@ var LoginComponent;
             var data = JSON.parse(loginData);
             txtUserName.value = data.USER_CODE;
             txtUserPassword.value = data.USER_PASSWORD;
+            //txtYear.value = "2021";
+            //cmbLanguage.value = data.Language;
+            //chkRemember.checked = true;
         }
         else {
         }
@@ -112,12 +115,12 @@ var LoginComponent;
                         document.cookie = "Inv1_systemProperties=" + JSON.stringify(SystemEnv).toString() + ";expires=Fri, 31 Dec 2030 23:59:59 GMT;path=/";
                         OnLogged();
                     }
-                    else {
+                    else { // Error in user or pass or active 
                         txtUserName.style.borderColor = "red";
                         txtUserPassword.style.borderColor = "red";
                     }
                 }
-                else {
+                else { // Error in API 
                     alert(res.ErrorMessage);
                     return;
                 }
@@ -168,5 +171,5 @@ var LoginComponent;
         });
     }
 })(LoginComponent || (LoginComponent = {}));
-//# sourceMappingURL=LoginComponent.js.map 
+//# sourceMappingURL=LoginComponent.js.map
 //# sourceMappingURL=LoginAdmin.js.map

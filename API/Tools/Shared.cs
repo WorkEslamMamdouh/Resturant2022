@@ -31,15 +31,15 @@ namespace Inv.API.Tools
                 return false;
             return true;
         }
-        public static ResponseResult TransactionProcess(int CompCode, int BranchCode, int id, string type, string OpMode, InvEntities _db)
-        {
+        public static ResponseResult TransactionProcess(int CompCode,int BranchCode, int id, string type,string OpMode , InvEntities _db)
+           {
 
             ResponseResult result = new ResponseResult();
             try
             {
                 ObjectParameter objParameterOk = new ObjectParameter("ok", typeof(Int32));
                 ObjectParameter objParameterTrNo = new ObjectParameter("trNo", typeof(Int32));
-                var ok = _db.G_ProcessTrans(CompCode, BranchCode, type, OpMode, id, objParameterTrNo, objParameterOk);
+                var ok = _db.G_ProcessTrans(CompCode, BranchCode, type,OpMode, id, objParameterTrNo,objParameterOk);
                 if ((int)objParameterOk.Value == 0)
                 {
                     result.ResponseData = objParameterTrNo.Value;

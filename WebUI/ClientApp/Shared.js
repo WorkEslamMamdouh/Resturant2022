@@ -1,15 +1,15 @@
-var APiSession = (function () {
+var APiSession = /** @class */ (function () {
     function APiSession() {
     }
+    APiSession.Session = new APISessionRecord();
     return APiSession;
 }());
-APiSession.Session = new APISessionRecord();
-var SearchGrid = (function () {
+var SearchGrid = /** @class */ (function () {
     function SearchGrid() {
     }
     return SearchGrid;
 }());
-var SharedWork = (function () {
+var SharedWork = /** @class */ (function () {
     function SharedWork() {
     }
     Object.defineProperty(SharedWork, "PageIndex", {
@@ -21,7 +21,7 @@ var SharedWork = (function () {
             //this.SetClientSession("PageIndex", value);
             localStorage.setItem("PageIndex", value.toString());
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(SharedWork, "ModelCount", {
@@ -46,7 +46,7 @@ var SharedWork = (function () {
         },
         set: function (value) {
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     SharedWork.Render = function () {
@@ -125,29 +125,29 @@ var SharedWork = (function () {
             SharedWork.OnSwitchModes();
         SharedWork.Render();
     };
+    SharedWork.UserFavorits = new Array();
+    SharedWork.OnNavigate = null;
+    SharedWork.OnSwitchModes = null;
     return SharedWork;
 }());
-SharedWork.UserFavorits = new Array();
-SharedWork.OnNavigate = null;
-SharedWork.OnSwitchModes = null;
-var UserPrivilege = (function () {
+var UserPrivilege = /** @class */ (function () {
     function UserPrivilege() {
     }
     return UserPrivilege;
 }());
-var SystemEnvironment = (function () {
+var SystemEnvironment = /** @class */ (function () {
     function SystemEnvironment() {
     }
     return SystemEnvironment;
 }());
-var sysInternal_Comm = (function () {
+var sysInternal_Comm = /** @class */ (function () {
     function sysInternal_Comm() {
     }
+    sysInternal_Comm.VatNatID = 0;
+    sysInternal_Comm.Itemid = 0;
     return sysInternal_Comm;
 }());
-sysInternal_Comm.slected_MemberID = 0;
-sysInternal_Comm.period_ID = 0;
-var SystemSession = (function () {
+var SystemSession = /** @class */ (function () {
     function SystemSession() {
         this.CurrentPrivileges = new UserPrivilege();
         this.CurrentEnvironment = new SystemEnvironment();
@@ -225,13 +225,52 @@ function GetSystemEnvironment() {
 //        return sys;
 //    }
 //}
-function GetSystemSession() {
+//function GetSystemSession(): SystemSession {
+//    if (document.cookie.length > 0) {
+//        // 
+//        var SysSession = new SystemSession;
+//        SysSession.CurrentEnvironment = JSON.parse(readCookie("Inv1_systemProperties")) as SystemEnvironment;
+//        SysSession.CurrentPrivileges = JSON.parse(readCookie("Inv1_Privilage")) as UserPrivilege;
+//        //RS.CurrentMemberComm = JSON.parse(getCookie("Inv1_Comm")) as Kids_Comm;
+//        return SysSession;
+//    }
+//}
+function GetSystemSession(Mod) {
     if (document.cookie.length > 0) {
-        // 
         var SysSession = new SystemSession;
         SysSession.CurrentEnvironment = JSON.parse(readCookie("Inv1_systemProperties"));
-        SysSession.CurrentPrivileges = JSON.parse(readCookie("Inv1_Privilage"));
-        //RS.CurrentMemberComm = JSON.parse(getCookie("Inv1_Comm")) as Kids_Comm;
+        if (Mod == "Home")
+            return SysSession;
+        var sys = new SystemTools();
+        var compCode = SysSession.CurrentEnvironment.CompCode;
+        if (!(compCode == "Undefied")) {
+            var branchCode = SysSession.CurrentEnvironment.BranchCode;
+            var UserCode = SysSession.CurrentEnvironment.UserCode;
+            var SystemCode = SysSession.CurrentEnvironment.SystemCode;
+            var SubSystemCode = SysSession.CurrentEnvironment.SubSystemCode;
+            var CurrentYear = SysSession.CurrentEnvironment.CurrentYear;
+            //var apiUrl = $("#GetAPIUrl").val() + "SystemTools" + "/" + "GetUserPrivilage";
+            Ajax.Callsync({
+                type: "GET",
+                url: sys.apiUrl("SystemTools", "GetUserPrivilage"),
+                data: { year: Number(CurrentYear), compCode: Number(compCode), branchCode: Number(branchCode), UserCode: UserCode, SystemCode: SystemCode, Modulecode: Mod },
+                success: function (d) {
+                    var result = JSON.parse(d);
+                    if (result == null || result.Access != true) {
+                        MessageBox.Show("Access denied", Mod);
+                        return;
+                    }
+                    if (result.Access == true) {
+                        debugger;
+                        $("#btnHelpRep").click(function () { ScreenHelp(Mod); });
+                        SysSession.CurrentPrivileges = result;
+                    }
+                    else {
+                        MessageBox.Show("No Inv1_Privilage", Mod);
+                    }
+                }
+            });
+        }
         return SysSession;
     }
 }
@@ -243,7 +282,7 @@ function GetSystemSession() {
 //        return Kids;
 //    }
 //}
-var PropertiesPage = (function () {
+var PropertiesPage = /** @class */ (function () {
     function PropertiesPage() {
     }
     PropertiesPage.Render = function () {
@@ -255,9 +294,9 @@ var PropertiesPage = (function () {
         }
         $("#txtNav").val(this.PageIndex.toString() + "/" + this.ModelCount.toString());
     };
+    PropertiesPage.OnNavigate = null;
     return PropertiesPage;
 }());
-PropertiesPage.OnNavigate = null;
 function GetCompanyName(compcode) {
     // 
     var sys = new SystemTools();

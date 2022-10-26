@@ -1,4 +1,5 @@
-﻿ using Newtonsoft.Json;
+﻿using Inv.WebUI.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,9 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Helpers;
-using Inv.WebUI.Reports.Models;
 
-namespace RS.WebUI.Reports.Models
+namespace Inv.WebUI.Reports.Models
 {
     public class ReportService
     {

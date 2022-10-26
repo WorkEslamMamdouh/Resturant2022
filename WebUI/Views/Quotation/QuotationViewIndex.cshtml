@@ -1,0 +1,585 @@
+﻿ 
+@{
+
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+<style>
+
+    .LiBut {
+        padding-bottom: 15px;
+        padding-top: 15px;
+        width: 20%;
+    }
+
+    .LiButCat {
+        /* padding-bottom: 15px;
+        padding-top: 15px;*/
+    }
+
+
+
+    .BUT {
+        width: 110%;
+        height: 80px;
+        border: 1px solid;
+        padding: 10px;
+        box-shadow: 4px 7px #888888;
+        border-radius: 22px;
+        font-weight: bold;
+        font-size: 19px;
+    }
+
+    .BUTCat {
+        width: 100%;
+        height: 53px;
+        border: 1px solid;
+        padding: 10px;
+        box-shadow: 4px 7px #888888;
+        border-radius: 22px;
+        background-color: #9d4444 !important;
+        font-weight: bold;
+        font-size: 23px;
+    }
+
+    .basket {
+        width: 44%;
+        height: 80px;
+        border: 1px solid;
+        padding: 10px;
+        box-shadow: 4px 7px #210505;
+        border-radius: 60px;
+        font-size: 40px;
+        background-color: #004078;
+    }
+
+    .Expens {
+        width: 6%;
+        height: 42px;
+        /* border: 1px solid; */
+        padding: 0px;
+        box-shadow: 4px 7px #210505;
+        border-radius: 60px;
+        font-size: 33px;
+        background-color: #780000;
+    }
+
+
+
+    .notification {
+        /*background-color: #555;*/
+        color: white;
+        text-decoration: none;
+        /* padding: 15px 26px; */
+        position: relative;
+        display: inline-block;
+        /* border-radius: 2px;*/
+    }
+
+        .notification:hover {
+            background: #5cb85c;
+        }
+
+        .notification .badge {
+            position: absolute;
+            /* top: -10px; */
+            right: -1px;
+            padding: 5px 10px;
+            border-radius: 50%;
+            background: red;
+            color: white;
+        }
+
+
+
+
+    .dropbtn {
+        background-color: #04AA6D;
+        color: white;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+    }
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #5c7db8;
+        min-width: 185px;
+        box-shadow: -11px 8px 16px 17px rgb(0 0 0 / 20%);
+        z-index: 1;
+        border-radius: 15px;
+        color: #bbd0e2;
+        text-align: center;
+        border: 10px solid;
+    }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            color: #f7f7f7;
+            font-weight: bold;
+            font-size: 17px;
+        }
+
+            .dropdown-content a:hover {
+                background-color: #5cb85c;
+            }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .dropdown:hover .dropbtn {
+        background-color: #3e8e41;
+    }
+
+
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    /* The Modal (background) */
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+
+    /* Modal Content */
+    .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%; 
+    }
+    .modal-contentE {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+    }
+
+    /* The Close Button */
+    .close {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    .closeExpens {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+        .closeExpens:hover,
+        .closeExpens:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+    th {
+        text-align: right !important;
+    }
+
+    .des {
+        width: 40% !important;
+    }
+
+    .Ser {
+        width: 1% !important;
+    }
+
+    .Heder {
+        background-color: #003e74;
+        color: white;
+        font-weight: bold;
+        font-size: 20px;
+    }
+</style>
+
+<body class="materialdesign">
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+
+
+
+            <div class="sparkline8-graph">
+
+
+
+
+                <div class="button-ap-list responsive-btn col-lg-12">
+
+
+
+
+                    <div class="col-lg-2">
+                        <div class="input-mark-inner mg-b-22">
+                            <input id="txtRFQ" name="RFQ" type="number" class="form-control" placeholder="">
+                        </div>
+                    </div>
+                    <div class="col-lg-1">
+                        <div class="input-mask-title">
+                            <label>رقم المرجع</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-1">
+
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="input-mark-inner mg-b-22">
+                            <select id="txt_Shift" name="" class="form-control  text_Display" style="text-align: center; font-weight: bold; font-size: 22px; height: 11%;">
+                                <option value="1">( A )</option>
+                                <option value="2">( B )</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-1">
+                        <div class="input-mask-title">
+                            <label>شفـت</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-1">
+
+                    </div>
+                    <div class="col-lg-1 col-xl-12">
+                        <button id="btnClean" type="button" class="btn btn-custon-four btn-danger" style="font-weight: bold;font-size: 19px;"><i class="fa fa-arrow-circle-left"></i>&nbsp; إلغاء</button>
+                    </div>
+                    <div class="col-lg-1">
+
+                    </div>
+                    <div class="col-lg-2 col-xl-12">
+                        <button id="btnsave" type="button" class="col-lg-12  btn btn-custon-four btn-success" style="font-weight: bold;font-size: 19px;"><i class="fa fa-save"></i>&nbsp; حفــظ</button>
+                    </div>
+
+                </div>
+                <div class="datatable-dashv1-list custom-datatable-overright">
+                    <table id="table" data-toggle="table" data-pagination="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="false" data-click-to-select="true" data-toolbar="#toolbar" style="direction: rtl;">
+                        <thead class="Heder">
+                            <tr>
+
+                                <th data-field=""></th>
+                                <th class="Ser" style="text-align: right; width:2%;">مسلســل</th>
+                                <th class="des" style="text-align: right; width: 40%;" data-field="description" data-editable="true">الصنــف</th>
+                                <th style="text-align: right; width: 5%;" data-editable="true">الكميــة</th>
+                                <th style="text-align: right; width: 8%;" class="Price" data-editable="true"> السعــر</th>
+                                <th style="text-align: right; width: 8%;" class="Price" data-editable="true">اجمــالي الصنـــف </th>
+                            </tr>
+                        </thead>
+                        <tbody id="Table_Data">
+                        </tbody>
+
+                        <tfoot>
+                            <tr id="toltal" class="   ">
+                                <td> </td>
+                                <td><input id="TotalSer" disabled="disabled" type="text" class="form-control" placeholder="SR"></td>
+                                <td> </td>
+                                <td><input id="TotalQTY" disabled="disabled" type="number" class="form-control" placeholder="QTY"></td>
+                                <td></td>
+                                <td><input id="TotalNet" disabled="disabled" value="0" type="number" class="form-control" placeholder="Total"></td>
+                            </tr>
+
+                        </tfoot>
+
+
+                    </table>
+                    <br />
+                    <div class="datatable-dashv1-list custom-datatable-overright">
+                        <div class="col-lg-1">
+                        </div>
+                        <div class="col-lg-3 col-xl-12">
+                            <div class="input-mark-inner mg-b-22">
+                                <input id="NetAfterVat" name="NetAfterVat" disabled type="number" class="form-control" placeholder="">
+                            </div>
+                        </div>
+                        <div class="col-lg-1">
+                            <label>الصافي</label>
+                        </div>
+                        <div class="col-lg-2 col-xl-12">
+                            <div class="input-mark-inner mg-b-22">
+                                <input id="DiscountAmount" name="DiscountAmount" type="number" class="form-control" placeholder="">
+                            </div>
+                        </div>
+                        <div class="col-lg-1">
+                            <label>خصم</label>
+                        </div>
+
+                        <div class="col-lg-2 col-xl-12">
+                            <div class="input-mark-inner mg-b-22">
+                                <input id="RoundingAmount" name="RoundingAmount" type="number" class="form-control" placeholder="">
+                            </div>
+                        </div>
+                        <div class="col-lg-1">
+                            <label>أضافه</label>
+                        </div>
+                    </div>
+                    <div class="datatable-dashv1-list custom-datatable-overright">
+                        <div class="col-lg-11  ">
+                            <div class="input-mark-inner mg-b-22">
+                                <textarea id="txtRemark" name="RoundingAmount" type="number" class="form-control" placeholder=""></textarea>
+                            </div>
+                        </div>
+                        <div class="col-lg-1">
+                            <label>الملاحظات</label>
+                        </div>
+
+
+
+                    </div>
+
+                    <div class="datatable-dashv1-list custom-datatable-overright">
+                        <div class="col-lg-12">
+                        </div>
+
+                    </div>
+
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                </div>
+             
+            </div>
+        </div>
+
+    </div>
+
+ 
+
+
+
+
+    @*--------------------------------------------------------------------------------------------myModalExpens---------------------------------------------------------------------------*@
+
+    <!-- The Modal -->
+    <div id="myModalExpens" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-contentE">
+            <span class="closeExpens">&times;</span>
+
+
+
+            <div class="sparkline8-graph ">
+
+
+
+
+                <div class="button-ap-list responsive-btn col-lg-12">
+                    <div class="col-lg-1">
+
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="input-mark-inner mg-b-22">
+                            <select id="txt_Shift_EX" name="" class="form-control  text_Display" style="text-align: center; font-weight: bold; font-size: 22px; height: 11%;">
+                                <option value="1">( A )</option>
+                                <option value="2">( B )</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-1">
+                        <div class="input-mask-title">
+                            <label>شفـت</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+
+                    </div>
+                    <div class="col-lg-2 col-xl-12">
+                        <button id="btnsaveExpens" type="button" class="col-lg-12  btn btn-custon-four btn-success" style="font-weight: bold;font-size: 19px;"><i class="fa fa-save"></i>&nbsp; صــرف</button>
+                    </div>
+
+                </div>
+                <div class="datatable-dashv1-list custom-datatable-overright">
+                    <table id="table" data-toggle="table" data-pagination="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="false" data-click-to-select="true" data-toolbar="#toolbar" style="direction: rtl;">
+                        <thead class="Heder">
+                            <tr>
+
+                                <th class="des" style="text-align: right; width:60%;" data-field="description" data-editable="true">تفصيل الصرف </th>
+                                <th style="text-align: right;  " data-editable="true">المبلغ</th>
+                            </tr>
+                        </thead>
+                        <tbody  >
+                            <tr id=" " class="   ">
+                                <td> <textarea id="txtDescA" maxlength="200" name="Remark" type="text" class="form-control" placeholder="تفصيل"></textarea></td>
+                                <td><input id="txtAmount" type="number" class="form-control" placeholder="المبلغ" style="height: 54px;"></td>
+                            </tr>
+                        </tbody>
+                      
+                    </table>
+
+
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+
+
+        // Get the modal
+        var modal = document.getElementById("myModal");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks on <span> (x), close the modal
+
+
+        // Get the modal
+        var ModalExpens = document.getElementById("myModalExpens");
+
+        // Get the <span> element that closes the modal
+        var spanExpens = document.getElementsByClassName("closeExpens")[0];
+
+
+
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) { 
+                modal.style.display = "none";
+                ModalExpens.style.display = "none";
+            }
+        }
+
+
+
+        // When the user clicks on <span> (x), close the modal
+        spanExpens.onclick = function () {
+            ModalExpens.style.display = "none";
+        }
+
+     
+    </script>
+
+
+
+
+    <div class="content-inner-all">
+        <div class="inbox-mailbox-area mg-b-15">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <div class="inbox-email-menu-list compose-b-mg-30 shadow-reset">
+                                    <ul class="nav nav-tabs" id="html_ButCat">
+                                        <li class=" col-lg-12" style="text-align: center;">
+                                            <button id="btn_basket" type="button" class="in animated zoomInDown btn btn-custon-four btn-success px-5 basket notification">
+                                                <i class="fa fa-shopping-basket"></i>
+                                                <span id="BadgeNum" class="in animated zoomInRight  badge display_none">0</span>
+                                            </button>
+
+                                        </li>
+                                        <li id=" ">
+                                            <input id="txtDate" type="date" class="in animated zoomInUp  form-control" placeholder="dd/mm/yyyy" style="border-radius: 22px; background-color: #004078; color: white; text-align: center;">
+                                        </li>
+
+
+
+
+
+
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-10">
+                                <div class="tab-content">
+                                    <div id="viewmail" class="tab-pane fade in animated zoomInDown shadow-reset custom-inbox-message active">
+
+                                        <div class="wrapper-pro">
+
+                                            <h1 id="TrNo" style="color:white"></h1>
+                                            <!-- Breadcome start-->
+                                            <div class="breadcome-area mg-b-30 small-dn" style="text-align: end;">
+                                                <button id="btn_Expens" title="مصـاريــف" type="button" class="in animated zoomInDown btn btn-custon-four btn-success px-5 Expens notification">
+                                                    <i class="fa fa-money"></i>
+                                                </button>
+                                            </div>
+
+                                            <div class="admin-dashone-data-table-area mg-b-15">
+                                                <div class="container-fluid">
+                                                    <div class="row">
+
+                                                        <div class="col-lg-12">
+                                                            <div class="sparkline8-list shadow-reset">
+
+                                                                <div class="sparkline8-hd">
+
+                                                                    <ul class="nav nav-tabs" id="html_But">
+
+                                                                        <li class=" col-lg-1 px-4 LiBut" style="">
+                                                                            <button id="btn" type="button" class="btn btn-custon-four btn-success px-5 BUT"><i class="fa fa-save"></i>&nbsp; save</button>
+                                                                        </li>
+
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript">
+    function myFunction() {
+        var fname = document.getElementById("fname").value;
+        if (fname == '<>')
+            alert("Condition met")
+    }
+</script>
+
+@*<script src="~/ClientApp/Customer/CustomerCompany.js"></script>*@
+<script src="~/ClientApp/Quotation/QuotationView.js"></script>

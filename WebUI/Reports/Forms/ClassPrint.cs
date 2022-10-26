@@ -12,7 +12,7 @@ using System.Web;
 namespace Inv.WebUI.Reports.Forms
 {
 
-
+    
 
     public class ClassPrint
     {
@@ -27,16 +27,27 @@ namespace Inv.WebUI.Reports.Forms
 
         public static void Export(LocalReport report, ReportsDetails ReportsDetail, bool print = true)
         {
+
+            if (ReportsDetail.TopMargin == 0) { ReportsDetail.TopMargin = 0.5; } else { ReportsDetail.TopMargin = (Convert.ToDouble(ReportsDetail.TopMargin) / 10); }
+            if (ReportsDetail.LeftMargin == 0) { ReportsDetail.LeftMargin = 0.5; } else { ReportsDetail.LeftMargin = (Convert.ToDouble(ReportsDetail.LeftMargin) / 10); }
+            if (ReportsDetail.RightMargin == 0) { ReportsDetail.RightMargin = 0.5; } else { ReportsDetail.RightMargin = (Convert.ToDouble(ReportsDetail.RightMargin) / 10); }
+            if (ReportsDetail.BottomMargin == 0) { ReportsDetail.BottomMargin = 0.5; } else { ReportsDetail.BottomMargin = (Convert.ToDouble(ReportsDetail.BottomMargin) / 10); }
+
+            if (ReportsDetail.PageWidth == 0) { ReportsDetail.PageWidth = 21; } 
+            if (ReportsDetail.PageHight == 0) { ReportsDetail.PageHight = 29.7; } 
+
+
             string deviceInfo =
-             @"<DeviceInfo>
-                <OutputFormat>EMF</OutputFormat>
-                <PageWidth>3in</PageWidth>
-                <PageHeight>8.3in</PageHeight>
-                <MarginTop>0in</MarginTop>
-                <MarginLeft>0.1in</MarginLeft>
-                <MarginRight>0.1in</MarginRight>
-                <MarginBottom>0in</MarginBottom>
-            </DeviceInfo>";
+         "<DeviceInfo>" +
+         "  <OutputFormat>EMF</OutputFormat>" +
+         "  <PageWidth>"+ ReportsDetail.PageWidth + "cm</PageWidth>" +
+         "  <PageHeight>"+ ReportsDetail.PageHight + "cm</PageHeight>" +
+         "  <MarginTop>" + ReportsDetail.TopMargin + "cm</MarginTop>" +
+         "  <MarginLeft>" + ReportsDetail.LeftMargin + "cm</MarginLeft>" +
+         "  <MarginRight>" + ReportsDetail.RightMargin + "cm</MarginRight>" +
+         "  <MarginBottom>" + ReportsDetail.BottomMargin + "cm</MarginBottom>" +
+         "</DeviceInfo>";
+
             Warning[] warnings;
             m_streams = new List<Stream>();
             report.Render("Image", deviceInfo, CreateStream, out warnings);
@@ -45,7 +56,7 @@ namespace Inv.WebUI.Reports.Forms
 
             if (print)
             {
-                Print(report, ReportsDetail.PrintName, ReportsDetail.PageSize, ReportsDetail.Landscape);
+                Print(report,ReportsDetail.PrintName, ReportsDetail.PageSize, ReportsDetail.Landscape);
             }
         }
 
@@ -78,6 +89,9 @@ namespace Inv.WebUI.Reports.Forms
                 }
                 else
                 {
+                    //IEnumerable<PaperSize> paperSizes = ps.PaperSizes.Cast<PaperSize>();
+                    //PaperSize sizeA4 = paperSizes.First<PaperSize>(size => size.Kind == PaperKind.A4); // setting paper size to A4 size    
+                    //printDoc.DefaultPageSettings.PaperSize = sizeA4;
 
                     printDoc.DefaultPageSettings.PaperSize = report.GetDefaultPageSettings().PaperSize;
                     printDoc.DefaultPageSettings.Margins = report.GetDefaultPageSettings().Margins;
@@ -92,7 +106,18 @@ namespace Inv.WebUI.Reports.Forms
 
                 m_currentPageIndex = 0;
                 printDoc.Print();
+                //here's a way to set the paper size by kind like 'A4' for example
 
+                // Conversion from String to Enum 
+                //var Paper = (PaperKind)Enum.Parse(typeof(PaperKind), "A6");
+
+
+                //IEnumerable<PaperSize> paperSizes = ps.PaperSizes.Cast<PaperSize>();
+                //PaperSize sizeA4 = paperSizes.First<PaperSize>(size => size.Kind == Paper); // setting paper size to A4 size                                                                                                   //recordDoc.DefaultPageSettings.PaperSize = sizeA4;
+
+
+
+                //printDoc.DefaultPageSettings.Landscape.PaperSize = sizeA4;
 
             }
 
@@ -157,7 +182,6 @@ namespace Inv.WebUI.Reports.Forms
                 m_streams = null;
             }
         }
-
 
 
 

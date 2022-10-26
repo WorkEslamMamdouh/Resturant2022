@@ -1,4 +1,4 @@
-var DataTable = (function () {
+var DataTable = /** @class */ (function () {
     function DataTable() {
         this.dataScr = new Array();
         this.Columns = new Array();
@@ -98,18 +98,27 @@ var DataTable = (function () {
         }
         $("#tableDiv").empty();
         $("#tableDiv").append('<table id="SearchDataTable" class="display" cellspacing="0" width="100%"><thead><tr>' + tableHeaders + '</tr></thead></table>');
-        var table = $('#SearchDataTable').DataTable({
+        var table = $('#SearchDataTable').dataTable({
             "destroy": true,
             "data": this.dataScr,
             "columns": this.column_defs,
             language: this.language_app
         });
-        table.on('click', 'tr', function () {
+        $('#SearchDataTable tbody').on('click', 'tr', function () {
+            debugger;
+            var tableData = $(this).children("td").map(function () {
+                return $(this).text();
+            }).get();
+            //alert("Your data is: " + tableData[0] + " , " + tableData[1] );
             //console.log(table.row(this).data());
+            //var data1 = this.dataScr()
+            //var data = table.row(this).dataScr()
+            //console.log(data)
             //console.log("SelectedKey: " + SearchGrid.SearchDataGrid.PrimaryKey);
             //console.log(SearchGrid.SearchDataGrid.SelectedKey);
             try {
-                SearchGrid.SearchDataGrid.SelectedKey = table.row(this).data()[SearchGrid.SearchDataGrid.PrimaryKey];
+                SearchGrid.SearchDataGrid.SelectedKey = tableData;
+                //SearchGrid.SearchDataGrid.SelectedKey = table.row(this).data()[SearchGrid.SearchDataGrid.PrimaryKey];
                 SearchGrid.SearchDataGrid.OnDoubleClick();
             }
             catch (e) {

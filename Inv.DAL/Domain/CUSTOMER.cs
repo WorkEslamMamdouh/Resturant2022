@@ -12,25 +12,42 @@ namespace Inv.DAL.Domain
     using System;
     using System.Collections.Generic;
     
-    public partial class CUSTOMER
+    public partial class Customer
     {
-        public int CUSTOMER_ID { get; set; }
+        public int CustomerId { get; set; }
         public string CustomerCODE { get; set; }
-        public string CUSTOMER_NAME { get; set; }
+        public Nullable<int> CatID { get; set; }
+        public Nullable<int> GroupId { get; set; }
+        public string NAMEA { get; set; }
         public string NAMEE { get; set; }
-        public string CUSTOMER_ADDRES { get; set; }
-        public string CUSTOMER_ADDRES_2 { get; set; }
-        public string PHONE { get; set; }
+        public string SHORTNAME { get; set; }
+        public string TEL { get; set; }
+        public string FAX { get; set; }
         public string EMAIL { get; set; }
+        public string CURCODE { get; set; }
         public string REMARKS { get; set; }
         public Nullable<bool> STATUS { get; set; }
+        public string MOBILE { get; set; }
+        public string Bank { get; set; }
+        public string AccountNo { get; set; }
+        public string ManagerName { get; set; }
+        public Nullable<int> NationalityID { get; set; }
         public Nullable<int> BranchCode { get; set; }
         public Nullable<int> CompCode { get; set; }
         public string CREATED_BY { get; set; }
         public Nullable<System.DateTime> CREATED_AT { get; set; }
         public Nullable<System.DateTime> UPDATED_AT { get; set; }
         public string UPDATED_BY { get; set; }
+        public string Employer { get; set; }
+        public string JobName { get; set; }
+        public string WorkTel { get; set; }
+        public string WorkAddress { get; set; }
+        public Nullable<int> VATType { get; set; }
+        public Nullable<int> AddDedType { get; set; }
+        public string AddDedNo { get; set; }
         public string VatNo { get; set; }
+        public Nullable<bool> Isactive { get; set; }
+        public Nullable<bool> IsAuthorized { get; set; }
         public Nullable<decimal> CreditLimit { get; set; }
         public Nullable<decimal> CreditLimitFC { get; set; }
         public Nullable<int> CreditPeriod { get; set; }
@@ -40,6 +57,22 @@ namespace Inv.DAL.Domain
         public Nullable<decimal> DebitFC { get; set; }
         public Nullable<decimal> Credit { get; set; }
         public Nullable<decimal> CreditFC { get; set; }
+        public Nullable<byte> PaymentType { get; set; }
+        public Nullable<decimal> FCRate { get; set; }
+        public Nullable<System.DateTime> CreditExpiryDate { get; set; }
+        public string RefCode2 { get; set; }
+        public string RefCode1 { get; set; }
         public Nullable<bool> IsCreditCustomer { get; set; }
+        public Nullable<int> DiscountplanID { get; set; }
+        public Nullable<int> SalesmanId { get; set; }
+        public string Address_postal { get; set; }
+        public string Address_Province { get; set; }
+        public string GroupVatNo { get; set; }
+        public string Address_Street { get; set; }
+        public string Address_Str_Additional { get; set; }
+        public string Address_BuildingNo { get; set; }
+        public string Address_Build_Additional { get; set; }
+        public string Address_City { get; set; }
+        public string Address_District { get; set; }
     }
 }

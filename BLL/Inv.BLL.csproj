@@ -9,13 +9,14 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Inv.BLL</RootNamespace>
     <AssemblyName>Inv.BLL</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -46,50 +47,28 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\Category\CategoryServices.cs" />
-    <Compile Include="Services\Category\ICategoryServices.cs" />
-    <Compile Include="Services\Customer\CustomerServices.cs" />
-    <Compile Include="Services\Customer\ICustomerServices.cs" />
-    <Compile Include="Services\familly_Cate\familly_CatServices.cs" />
-    <Compile Include="Services\familly_Cate\Ifamilly_CatServices.cs" />
-    <Compile Include="Services\GAlertControl\G_AlertControlService.cs" />
-    <Compile Include="Services\GAlertControl\IG_AlertControlService.cs" />
-    <Compile Include="Services\GCompany\GCompanyService.cs" />
-    <Compile Include="Services\GCompany\IGCompanyService.cs" />
     <Compile Include="Services\CompStatus\II_VW_GetCompStatusService.cs" />
     <Compile Include="Services\CompStatus\I_VW_GetCompStatusService.cs" />
-    <Compile Include="Services\Item\IItemServices.cs" />
-    <Compile Include="Services\Item\ItemServices.cs" />
-    <Compile Include="Services\Outletpirce\IOutletpirceServices.cs" />
-    <Compile Include="Services\Outletpirce\OutletpirceServices.cs" />
-    <Compile Include="Services\Purchases\IPurchases_MasterServices.cs" />
-    <Compile Include="Services\Purchases\Purchases_MasterServices.cs" />
-    <Compile Include="Services\SlsTrSales\ISlsTrSalesServices.cs" />
-    <Compile Include="Services\SlsTrSales\SlsTrSalesServices.cs" />
-    <Compile Include="Services\Stok_ORDER\IStok_ORDERServices.cs" />
-    <Compile Include="Services\Stok_ORDER\Stok_ORDERServices.cs" />
-    <Compile Include="Services\USER_BRANCH\G_USER_BRANCHService.cs" />
-    <Compile Include="Services\USER_BRANCH\IG_USER_BRANCHService.cs" />
-    <Compile Include="Services\G_SubSystem\G_SubSystem.cs" />
-    <Compile Include="Services\G_SubSystem\IG_SubSystemService.cs" />
-    <Compile Include="Services\G_Control\G_ControlService.cs" />
-    <Compile Include="Services\G_Control\IG_ControlService.cs" />
-    <Compile Include="Services\GCostCenter\GCostCenterService.cs" />
-    <Compile Include="Services\GCostCenter\IGCostCenterService.cs" />
     <Compile Include="Services\GRoleUsers\GRoleUsersService.cs" />
     <Compile Include="Services\GRoleUsers\IGRoleUsersService.cs" />
     <Compile Include="Services\GRole\GRoleService.cs" />
     <Compile Include="Services\GRole\IGRoleService.cs" />
     <Compile Include="Services\GUSERS\G_USERSService.cs" />
     <Compile Include="Services\GUSERS\IG_USERSService.cs" />
+    <Compile Include="Services\G_Control\G_ControlService.cs" />
+    <Compile Include="Services\G_Control\IG_ControlService.cs" />
     <Compile Include="Services\IControl\II_ControlService.cs" />
     <Compile Include="Services\IControl\I_ControlService.cs" />
-    <Compile Include="Services\IGCodes\IGCodesService.cs" />
-    <Compile Include="Services\IGCodes\IIGCodesService.cs" />
-    <Compile Include="Services\GBRANCH\IGBRANCHService.cs" />
-    <Compile Include="Services\GBRANCH\GBRANCHService.cs" />
-    <Compile Include="Services\Vendor\IVendorServices.cs" />
-    <Compile Include="Services\Vendor\VendorServices.cs" />
+    <Compile Include="Services\IItems\IItemsService.cs" />
+    <Compile Include="Services\IItems\ItemsService.cs" />
+    <Compile Include="Services\ISlsTRInvoice\IISlsTRInvoiceService.cs" />
+    <Compile Include="Services\ISlsTRInvoice\ISlsTRInvoiceService.cs" />
+    <Compile Include="Services\SlsInvoiceItems\ISlsInvoiceItemsService.cs" />
+    <Compile Include="Services\SlsInvoiceItems\SlsInvoiceItemsService.cs" />
+    <Compile Include="Services\SlsTrSales\ISlsTrSalesServices.cs" />
+    <Compile Include="Services\SlsTrSales\SlsTrSalesServices.cs" />
+    <Compile Include="Services\USER_BRANCH\G_USER_BRANCHService.cs" />
+    <Compile Include="Services\USER_BRANCH\IG_USER_BRANCHService.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

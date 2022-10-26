@@ -184,16 +184,16 @@ first-child .main_hr
 	z-index: 9999;
 }
 #back_circle {
-	background-image: url(../../images/Background/logo5.png);
-	width: 165px;
-	height: 146px;
-	float: left;
-	z-index: 9999;
-	position: relative;
-	background-size: 100% 100%;
-	margin-top: -10px;
-	text-align: center;
-	margin: 6% 0px 0px 7%;
+    background-image: url('../../images/Background/logo5.png');
+    width: 200px;
+    height: 200px;
+    float: left;
+    z-index: 9999;
+    position: relative;
+    background-size: 100% 100%;
+    margin-top: -10px;
+    text-align: center;
+    margin: 0px 0px 0px 16%;
 }
 
 

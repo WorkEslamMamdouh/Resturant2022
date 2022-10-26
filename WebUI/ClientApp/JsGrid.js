@@ -12,9 +12,9 @@ var normalizePromise = function (promise) {
     }
     return d.promise();
 };
-var JsGrid = (function () {
+var JsGrid = /** @class */ (function () {
     function JsGrid() {
-        this.SysSession = GetSystemSession();
+        this.SysSession = GetSystemSession('Home');
         this.autosearch = true;
         this.ConfirmDeleteing = false;
         this.PageSize = 50;
@@ -95,6 +95,7 @@ var JsGrid = (function () {
             //    }
             //},
             getFilter: function () {
+                debugger;
                 var result = {};
                 this._eachField(function (field) {
                     if (field.filtering) {
@@ -104,6 +105,7 @@ var JsGrid = (function () {
                 return result;
             },
             filterTemplate: function () {
+                debugger;
                 if (!this.filtering)
                     return "";
                 var grid = this._grid, $result = this.filterControl = this._createTextBox();
@@ -118,6 +120,7 @@ var JsGrid = (function () {
                 return $result;
             },
             loadData: function (filter) {
+                debugger;
                 filter = filter || (this.filtering ? this.getFilter() : {});
                 $.extend(filter, this._loadStrategy.loadParams(), this._sortingParams());
                 var args = this._callEventHandler(this.onDataLoading, {
@@ -133,6 +136,7 @@ var JsGrid = (function () {
                 });
             },
             _controllerCall: function (method, param, isCanceled, doneCallback) {
+                debugger;
                 if (isCanceled)
                     return $.Deferred().reject().promise();
                 this._showLoading();
@@ -146,12 +150,14 @@ var JsGrid = (function () {
                     .always($.proxy(this._hideLoading, this));
             },
             _setSortingParams: function (field, order) {
+                debugger;
                 field = this._normalizeField(field);
                 order = order || ((this._sortField === field) ? this._reversedSortOrder(this._sortOrder) : "asc");
                 this._sortField = field;
                 this._sortOrder = order;
             },
             sort: function (field, order) {
+                debugger;
                 if ($.isPlainObject(field)) {
                     order = field.order;
                     field = field.field;
@@ -162,6 +168,7 @@ var JsGrid = (function () {
                 return this._loadStrategy.sort();
             },
             _sortData: function () {
+                debugger;
                 var sortFactor = this._sortFactor(), sortField = this._sortField;
                 if (sortField) {
                     this.data.sort(function (item1, item2) {
@@ -170,6 +177,7 @@ var JsGrid = (function () {
                 }
             },
             _sortingParams: function () {
+                debugger;
                 if (this.sorting && this._sortField) {
                     return {
                         sortField: this._sortField.name,
@@ -179,6 +187,7 @@ var JsGrid = (function () {
                 return {};
             },
             search: function (filter) {
+                debugger;
                 this._resetSorting();
                 this._resetPager();
                 return this.loadData(filter);
@@ -333,23 +342,23 @@ var JsGrid = (function () {
     };
     return JsGrid;
 }());
-var JsGridInsertEventArgs = (function () {
+var JsGridInsertEventArgs = /** @class */ (function () {
     function JsGridInsertEventArgs() {
     }
     return JsGridInsertEventArgs;
 }());
-var JsGridDeleteEventArgs = (function () {
+var JsGridDeleteEventArgs = /** @class */ (function () {
     function JsGridDeleteEventArgs() {
         this.Cancel = false;
     }
     return JsGridDeleteEventArgs;
 }());
-var JsGridUpdateEventArgs = (function () {
+var JsGridUpdateEventArgs = /** @class */ (function () {
     function JsGridUpdateEventArgs() {
     }
     return JsGridUpdateEventArgs;
 }());
-var JsGridEditEventArgs = (function () {
+var JsGridEditEventArgs = /** @class */ (function () {
     function JsGridEditEventArgs() {
     }
     return JsGridEditEventArgs;
