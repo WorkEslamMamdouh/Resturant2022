@@ -19,6 +19,7 @@ namespace QuotationView {
     var AllStock: AllItems = new AllItems();
 
     var btn_basket: HTMLButtonElement;
+    var btn_Cust: HTMLButtonElement;
     var btn_Expens: HTMLButtonElement;
     var btnsave: HTMLButtonElement;
     var btnsaveExpens: HTMLButtonElement;
@@ -26,9 +27,11 @@ namespace QuotationView {
     var DiscountAmount: HTMLInputElement;
     var RoundingAmount: HTMLInputElement;
     var modal = document.getElementById("myModal");
-    var ModalExpens = document.getElementById("myModalExpens");
+    var ModalExpens = document.getElementById("myModalExpens"); 
+    var ModalCust = document.getElementById("myModalCust");
 
     debugger
+    btn_Cust = document.getElementById('btn_Cust') as HTMLButtonElement;
     btn_Expens = document.getElementById('btn_Expens') as HTMLButtonElement;
     btn_basket = document.getElementById('btn_basket') as HTMLButtonElement;
     btnsaveExpens = document.getElementById('btnsaveExpens') as HTMLButtonElement;
@@ -46,6 +49,7 @@ namespace QuotationView {
         $("#txtDate").val(GetDate());
         GetGetAllStock();
 
+        btn_Cust.onclick = btn_Cust_onclick;
         btn_Expens.onclick = btn_Expens_onclick;
         btn_basket.onclick = btn_basket_onclick;
         btnsave.onclick = btnsave_onclick;
@@ -60,7 +64,12 @@ namespace QuotationView {
          
 
     }
-    function btn_Expens_onclick() {
+    function btn_Cust_onclick() {
+
+        ModalCust.style.display = "block";
+
+    }
+     function btn_Expens_onclick() {
 
         ModalExpens.style.display = "block";
 
@@ -265,7 +274,8 @@ namespace QuotationView {
             '<td> <textarea id="Description' + cnt + '" disabled="disabled" name="Description" type="text" class="form-control" style="height:34px" placeholder="Description" spellcheck="false"></textarea></td>' +
             '<td><input  id="QTY' + cnt + '"  ' + disabled + ' type="number" class="form-control" placeholder="QTY"></td>' +
             '<td><input  id="UnitPrice' + cnt + '"   ' + disabled + '  value="0" type="number" class="form-control" placeholder="Unit Price"></td>' +
-            '<td><input  id="TotalPrice' + cnt + '" disabled="disabled" value="0" type="number" class="form-control" placeholder="Unit Price"></td>' +
+            '<td><input  id="TotalPrice' + cnt + '" disabled="disabled" value="0" type="number" class="form-control" placeholder="Unit Price"></td>' + 
+            '<td><textarea id="Remark' + cnt + '" name="RoundingAmount" type="number" class="form-control" placeholder="" spellcheck="false"></textarea></td>' +
             ' <input  id="txt_StatusFlag' + cnt + '" type="hidden" class="form-control"> ' +
             ' <input  id="txt_ItemID' + cnt + '" type="hidden" class="form-control"> ' +
             '</tr>';
@@ -393,7 +403,17 @@ namespace QuotationView {
         }
 
     }
+    function validation() {
 
+        if (Number($('#TotalSer').val()) == 0) {
+            Errorinput($('#Table_Data'));
+            alert('يجب ادخال اصناف');
+            return false;
+        }
+      
+  
+        return true;
+    }
     function btnsave_onclick() {
 
         insert();
@@ -459,6 +479,7 @@ namespace QuotationView {
                 invoiceItemSingleModel.NetUnitPrice = Number($("#UnitPrice" + i).val());
                 invoiceItemSingleModel.ItemTotal = Number($("#Totalprice" + i).val());
                 invoiceItemSingleModel.NetAfterVat = Number($("#Totalprice" + i).val());
+                invoiceItemSingleModel.AllowReason = $("#Remark" + i).val();
                 invoiceItemSingleModel.UomID = 4;
                 InvoiceItemsDetailsModel.push(invoiceItemSingleModel);
 
@@ -468,6 +489,7 @@ namespace QuotationView {
         MasterDetailsModel.I_Sls_TR_InvoiceItems = InvoiceItemsDetailsModel;
     }
     function insert() {
+        if (!validation()) return;
 
         Assign();
         Ajax.Callsync({

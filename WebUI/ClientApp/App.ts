@@ -923,6 +923,35 @@ function DateFormatRep(dateForm: string): string {
 }
 
 
+function DateFormatSql(dateForm: string): string {
+    debugger
+    try {
+        var date: Date = new Date();
+        let myDate: string = "";
+        if (dateForm.indexOf("Date(") > -1) {
+            myDate = dateForm.split('(')[1].split(')')[0];
+            date = new Date(Number(myDate));
+        }
+        else {
+            date = new Date(ConvertTDate(dateForm).toString());
+        }
+
+        let yy = date.getFullYear();
+        let mm = (date.getMonth() + 1);
+        let dd = date.getDate();
+
+        let year = yy;
+        let month = (mm < 10) ? ("0" + mm.toString()) : mm.toString();
+        let day = (dd < 10) ? ("0" + dd.toString()) : dd.toString();
+
+        var startDate = month + "/" + day + "/" + year;
+        let form_date = startDate;
+        return form_date;
+    } catch (e) {
+        return DateFormat((new Date()).toString());
+    }
+}
+
 
 
 function GetTime() {

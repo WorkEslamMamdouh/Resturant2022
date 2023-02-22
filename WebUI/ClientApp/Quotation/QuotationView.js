@@ -12,6 +12,7 @@ var QuotationView;
     var MasterDetailsModel = new SlsInvoiceMasterDetails();
     var AllStock = new AllItems();
     var btn_basket;
+    var btn_Cust;
     var btn_Expens;
     var btnsave;
     var btnsaveExpens;
@@ -20,7 +21,9 @@ var QuotationView;
     var RoundingAmount;
     var modal = document.getElementById("myModal");
     var ModalExpens = document.getElementById("myModalExpens");
+    var ModalCust = document.getElementById("myModalCust");
     debugger;
+    btn_Cust = document.getElementById('btn_Cust');
     btn_Expens = document.getElementById('btn_Expens');
     btn_basket = document.getElementById('btn_basket');
     btnsaveExpens = document.getElementById('btnsaveExpens');
@@ -35,6 +38,7 @@ var QuotationView;
         CUSTOM3 = SysSession.CurrentPrivileges.CUSTOM3;
         $("#txtDate").val(GetDate());
         GetGetAllStock();
+        btn_Cust.onclick = btn_Cust_onclick;
         btn_Expens.onclick = btn_Expens_onclick;
         btn_basket.onclick = btn_basket_onclick;
         btnsave.onclick = btnsave_onclick;
@@ -46,6 +50,9 @@ var QuotationView;
         ChackBadgeNum();
     }
     QuotationView.InitalizeComponent = InitalizeComponent;
+    function btn_Cust_onclick() {
+        ModalCust.style.display = "block";
+    }
     function btn_Expens_onclick() {
         ModalExpens.style.display = "block";
     }
@@ -177,6 +184,7 @@ var QuotationView;
             '<td><input  id="QTY' + cnt + '"  ' + disabled + ' type="number" class="form-control" placeholder="QTY"></td>' +
             '<td><input  id="UnitPrice' + cnt + '"   ' + disabled + '  value="0" type="number" class="form-control" placeholder="Unit Price"></td>' +
             '<td><input  id="TotalPrice' + cnt + '" disabled="disabled" value="0" type="number" class="form-control" placeholder="Unit Price"></td>' +
+            '<td><textarea id="Remark' + cnt + '" name="RoundingAmount" type="number" class="form-control" placeholder="" spellcheck="false"></textarea></td>' +
             ' <input  id="txt_StatusFlag' + cnt + '" type="hidden" class="form-control"> ' +
             ' <input  id="txt_ItemID' + cnt + '" type="hidden" class="form-control"> ' +
             '</tr>';
@@ -280,6 +288,14 @@ var QuotationView;
             }
         }
     }
+    function validation() {
+        if (Number($('#TotalSer').val()) == 0) {
+            Errorinput($('#Table_Data'));
+            alert('يجب ادخال اصناف');
+            return false;
+        }
+        return true;
+    }
     function btnsave_onclick() {
         insert();
     }
@@ -332,6 +348,7 @@ var QuotationView;
                 invoiceItemSingleModel.NetUnitPrice = Number($("#UnitPrice" + i).val());
                 invoiceItemSingleModel.ItemTotal = Number($("#Totalprice" + i).val());
                 invoiceItemSingleModel.NetAfterVat = Number($("#Totalprice" + i).val());
+                invoiceItemSingleModel.AllowReason = $("#Remark" + i).val();
                 invoiceItemSingleModel.UomID = 4;
                 InvoiceItemsDetailsModel.push(invoiceItemSingleModel);
             }
@@ -340,6 +357,8 @@ var QuotationView;
         MasterDetailsModel.I_Sls_TR_InvoiceItems = InvoiceItemsDetailsModel;
     }
     function insert() {
+        if (!validation())
+            return;
         Assign();
         Ajax.Callsync({
             type: "POST",

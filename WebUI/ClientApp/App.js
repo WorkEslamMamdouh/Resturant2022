@@ -735,6 +735,32 @@ function DateFormatRep(dateForm) {
         return DateFormatRep((new Date()).toString());
     }
 }
+function DateFormatSql(dateForm) {
+    debugger;
+    try {
+        var date = new Date();
+        var myDate = "";
+        if (dateForm.indexOf("Date(") > -1) {
+            myDate = dateForm.split('(')[1].split(')')[0];
+            date = new Date(Number(myDate));
+        }
+        else {
+            date = new Date(ConvertTDate(dateForm).toString());
+        }
+        var yy = date.getFullYear();
+        var mm = (date.getMonth() + 1);
+        var dd = date.getDate();
+        var year = yy;
+        var month = (mm < 10) ? ("0" + mm.toString()) : mm.toString();
+        var day = (dd < 10) ? ("0" + dd.toString()) : dd.toString();
+        var startDate = month + "/" + day + "/" + year;
+        var form_date = startDate;
+        return form_date;
+    }
+    catch (e) {
+        return DateFormat((new Date()).toString());
+    }
+}
 function GetTime() {
     var date = new Date();
     var hours = date.getHours();

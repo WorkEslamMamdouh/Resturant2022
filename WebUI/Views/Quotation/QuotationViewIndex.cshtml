@@ -209,11 +209,17 @@
     }
 
     .des {
-        width: 40% !important;
+        width: 30% !important;
+    }
+    .Remark {
+        width: 25% !important;
     }
 
     .Ser {
         width: 1% !important;
+    }
+    .Cust {
+        background-color: cadetblue !important;
     }
 
     .Heder {
@@ -295,6 +301,7 @@
                                 <th style="text-align: right; width: 5%;" data-editable="true">الكميــة</th>
                                 <th style="text-align: right; width: 8%;" class="Price" data-editable="true"> السعــر</th>
                                 <th style="text-align: right; width: 8%;" class="Price" data-editable="true">اجمــالي الصنـــف </th>
+                                <th style="text-align: right; width: 10%;" class="Remark" data-editable="true">ملاحظات </th>
                             </tr>
                         </thead>
                         <tbody id="Table_Data">
@@ -308,6 +315,7 @@
                                 <td><input id="TotalQTY" disabled="disabled" type="number" class="form-control" placeholder="QTY"></td>
                                 <td></td>
                                 <td><input id="TotalNet" disabled="disabled" value="0" type="number" class="form-control" placeholder="Total"></td>
+                                <td></td>
                             </tr>
 
                         </tfoot>
@@ -369,13 +377,13 @@
                     <br />
                     <br />
                 </div>
-             
+
             </div>
         </div>
 
     </div>
 
- 
+
 
 
 
@@ -430,13 +438,13 @@
                                 <th style="text-align: right;  " data-editable="true">المبلغ</th>
                             </tr>
                         </thead>
-                        <tbody  >
+                        <tbody>
                             <tr id=" " class="   ">
                                 <td> <textarea id="txtDescA" maxlength="200" name="Remark" type="text" class="form-control" placeholder="تفصيل"></textarea></td>
                                 <td><input id="txtAmount" type="number" class="form-control" placeholder="المبلغ" style="height: 54px;"></td>
                             </tr>
                         </tbody>
-                      
+
                     </table>
 
 
@@ -447,6 +455,81 @@
         </div>
 
     </div>
+
+
+
+
+
+
+    @*--------------------------------------------------------------------------------------------myModalCust---------------------------------------------------------------------------*@
+
+    <!-- The Modal -->
+    <div id="myModalCust" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-contentE">
+            <span class="closeCust">&times;</span>
+
+
+
+            <div class="sparkline8-graph ">
+
+
+
+
+                <div class="button-ap-list responsive-btn col-lg-12">
+                    <div class="col-lg-1">
+
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="input-mark-inner mg-b-22">
+                            <select id="txt_Shift_EX" name="" class="form-control  text_Display" style="text-align: center; font-weight: bold; font-size: 22px; height: 11%;">
+                                <option value="1">( A )</option>
+                                <option value="2">( B )</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-1">
+                        <div class="input-mask-title">
+                            <label>شفـت</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+
+                    </div>
+                    <div class="col-lg-2 col-xl-12">
+                        <button id="btnsaveExpens" type="button" class="col-lg-12  btn btn-custon-four btn-success" style="font-weight: bold;font-size: 19px;"><i class="fa fa-save"></i>&nbsp; صــرف</button>
+                    </div>
+
+                </div>
+                <div class="datatable-dashv1-list custom-datatable-overright">
+                    <table id="table" data-toggle="table" data-pagination="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="false" data-click-to-select="true" data-toolbar="#toolbar" style="direction: rtl;">
+                        <thead class="Heder">
+                            <tr>
+
+                                <th class="des" style="text-align: right; width:60%;" data-field="description" data-editable="true">تفصيل الصرف </th>
+                                <th style="text-align: right;  " data-editable="true">المبلغ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr id=" " class="   ">
+                                <td> <textarea id="txtDescA" maxlength="200" name="Remark" type="text" class="form-control" placeholder="تفصيل"></textarea></td>
+                                <td><input id="txtAmount" type="number" class="form-control" placeholder="المبلغ" style="height: 54px;"></td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+
+
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+
+
 
     <script>
 
@@ -462,9 +545,11 @@
 
         // Get the modal
         var ModalExpens = document.getElementById("myModalExpens");
+        var ModalCust = document.getElementById("myModalCust");
 
         // Get the <span> element that closes the modal
         var spanExpens = document.getElementsByClassName("closeExpens")[0];
+        var spanCust = document.getElementsByClassName("closeCust")[0];
 
 
 
@@ -474,9 +559,10 @@
 
         // When the user clicks anywhere outside of the modal, close it
         window.onclick = function (event) {
-            if (event.target == modal) { 
+            if (event.target == modal || event.target == ModalExpens || event.target == ModalCust ) {
                 modal.style.display = "none";
                 ModalExpens.style.display = "none";
+                ModalCust.style.display = "none";
             }
         }
 
@@ -487,7 +573,11 @@
             ModalExpens.style.display = "none";
         }
 
-     
+        spanCust.onclick = function () {
+            ModalCust.style.display = "none";
+        }
+
+
     </script>
 
 
@@ -530,9 +620,15 @@
                                             <h1 id="TrNo" style="color:white"></h1>
                                             <!-- Breadcome start-->
                                             <div class="breadcome-area mg-b-30 small-dn" style="text-align: end;">
+
+                                                <button id="btn_Cust" title="الاعملاء" style="right: 44%;" type="button" class="Cust in animated zoomInDown btn btn-custon-four btn-success px-5 Expens notification">
+                                                    <i class=" adminpro-icon adminpro-user-rounded"></i>
+                                                </button>
+
                                                 <button id="btn_Expens" title="مصـاريــف" type="button" class="in animated zoomInDown btn btn-custon-four btn-success px-5 Expens notification">
                                                     <i class="fa fa-money"></i>
                                                 </button>
+
                                             </div>
 
                                             <div class="admin-dashone-data-table-area mg-b-15">

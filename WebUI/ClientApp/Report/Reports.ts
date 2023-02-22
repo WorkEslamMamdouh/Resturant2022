@@ -211,14 +211,14 @@ namespace Reports {
             rp.ToDate =  GetDate();   
 		}  
         else {
-            rp.FromDate = DateFormat($('#txtFromDate').val());
-            rp.ToDate =   DateFormat($('#txtToDate').val()) ;
+            rp.FromDate = DateFormatSql($('#txtFromDate').val());
+            rp.ToDate = DateFormatSql($('#txtToDate').val()) ;
         }   
         if (typerep == 5) {
             debugger
 
-            rp.FromDate = DateFormatRep($('#txtFromDate').val());
-            rp.ToDate = DateFormatRep($('#txtToDate').val());
+            rp.FromDate = DateFormatSql($('#txtFromDate').val());
+            rp.ToDate = DateFormatSql($('#txtToDate').val());
 
             rp.CatId = Number($('#txt_Shift').val());
             rp.ItemFamId = -1;
@@ -234,8 +234,8 @@ namespace Reports {
             })
         }
         else if (typerep == 6) {  
-            rp.FromDate = DateFormatRep($('#txtFromDate').val());
-            rp.ToDate = DateFormatRep($('#txtToDate').val());
+            rp.FromDate = DateFormatSql($('#txtFromDate').val());
+            rp.ToDate = DateFormatSql($('#txtToDate').val());
         Ajax.Callsync({
             url: Url.Action("Prnt_Expense", "GeneralReports"),
             data: rp,
