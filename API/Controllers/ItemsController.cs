@@ -126,7 +126,7 @@ namespace Inv.API.Controllers
             {
                 var items = ItemsService.Update(item); 
                 ItemsService.UpdateItemYear(updatedtemsYear[o]);
-
+                o++;
                 Shared.TransactionProcess(Convert.ToInt32(1), 1, items.ItemID, "ItemDef", "update", db);
             }
             foreach (var item in deletedtems)

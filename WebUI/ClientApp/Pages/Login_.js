@@ -43,7 +43,6 @@ var Login_;
             var data = JSON.parse(loginData);
             txtUserName.value = data.USER_CODE;
             txtUserPassword.value = data.USER_PASSWORD;
-            //txtYear.value = "2021";
             cmbLanguage.value = data.Language;
             chkRemember.checked = true;
         }
@@ -52,6 +51,8 @@ var Login_;
             //txtYear.value = SharedWork.Session.CurrentYear;
             //cmbLanguage.value = SharedWork.Session.Language;
         }
+        var today = new Date();
+        txtYear.value = today.getFullYear().toString();
     }
     Login_.InitalizeComponent = InitalizeComponent;
     function checkBrowser() {
@@ -92,7 +93,6 @@ var Login_;
     }
     Login_.checkBrowser = checkBrowser;
     function Login() {
-        debugger;
         var userName = txtUserName.value;
         var userPassword = txtUserPassword.value;
         var user = new G_USERS();
@@ -118,11 +118,9 @@ var Login_;
                 var res = d;
                 if (res.IsSuccess == true) {
                     var result = res.Response;
-                    debugger;
                     if (result != null && result.USER_CODE != null) {
-                        $("#divLogin").css("display", "block");
-                        //$("#divLogin").css("display", "none");
-                        $("#divCompanies").css("display", "none");
+                        $("#divLogin").css("display", "none");
+                        $("#divCompanies").css("display", "block");
                         SystemEnv.Token = result.Tokenid;
                         SystemEnv.UserType = result.USER_TYPE;
                         SystemEnv.SalesManID = result.SalesManID;
@@ -161,7 +159,6 @@ var Login_;
                             localStorage.setItem("Inv1_Login_Data", JSON.stringify(loginData));
                         }
                         GoToCompanySelect();
-                        //OnLogged();
                     }
                     else { // Error in user or pass or active 
                         txtUserName.style.borderColor = "red";
@@ -176,7 +173,6 @@ var Login_;
         });
     }
     function GoToCompanySelect() {
-        debugger;
         //$("#tblLogin").css("display", "none");
         //$("#tblCompany").css("display", "block");
         //(document.getElementById("btnOk") as HTMLInputElement).addEventListener("click", () => { 
@@ -198,8 +194,7 @@ var Login_;
                         var status = CompanyStatus.CompStatus;
                         var masg = CompanyStatus.LoginMsg;
                         if (status == 0 || status == 1 || status == 2) {
-                            //MessageBox.Showwithoutclick(CompanyStatus.LoginMsg, "");   
-                            debugger;
+                            //MessageBox.Showwithoutclick(CompanyStatus.LoginMsg, "");                                
                             Ajax.Callsyncstart({
                                 type: "GET",
                                 url: sys.apiUrl("I_Control", "GetAll"),
@@ -208,7 +203,6 @@ var Login_;
                                 success: function (d) {
                                     var res = d;
                                     if (res.IsSuccess) {
-                                        debugger;
                                         var CompanyService = res.Response;
                                         if (CompanyService != null) {
                                             SystemEnv.I_Control = CompanyService;
@@ -226,32 +220,32 @@ var Login_;
                                             SystemEnv.StartDate = CompanyStatus.FirstDate.substr(0, 10);
                                             SystemEnv.EndDate = CompanyStatus.LastDate.substr(0, 10);
                                             SystemEnv.NationalityID = CompanyService[0].NationalityID;
-                                            debugger;
-                                            //Ajax.Callsyncstart({
-                                            //    type: "GET",
-                                            //    url: sys.apiUrl("GBranch", "GetBranch"),
-                                            //    data: { CompCode: Number(compCode), BRA_CODE: Number(braCode) },
-                                            //    async: false,
-                                            //    success: (d) => {
-                                            //        let res = d as BaseResponse;
-                                            //        if (res.IsSuccess) {
-                                            //            G_BRANCHService = res.Response as Array<G_BRANCH>;
-                                            //            if (G_BRANCHService != null) { 
-                                            //                SystemEnv.SlsInvType = G_BRANCHService[0].SlsInvType;
-                                            //                SystemEnv.WholeInvoiceTransCode = G_BRANCHService[0].WholeInvoiceTransCode;
-                                            //                SystemEnv.RetailInvoicePayment = G_BRANCHService[0].RetailInvoicePayment;
-                                            //                SystemEnv.WholeInvoicePayment = G_BRANCHService[0].WholeInvoicePayment;
-                                            //                SystemEnv.ServiceInvoiceTransCode = G_BRANCHService[0].ServiceInvoiceTransCode;
-                                            //                SystemEnv.ReturnTypeCode = G_BRANCHService[0].ReturnTypeCode;
-                                            //                SystemEnv.InvoiceTypeCode = G_BRANCHService[0].InvoiceTypeCode;
-                                            //                SystemEnv.RetailInvoiceTransCode = G_BRANCHService[0].RetailInvoiceTransCode; 
-                                            //            } else {
-                                            //                var msg = SystemEnv.ScreenLanguage == "ar" ? "غير مصرح لك الدخول الفرع" : "You are not allowed to login";
-                                            //                MessageBox.Show(msg, "");
-                                            //            }
-                                            //        }
-                                            //    }
-                                            //});
+                                            Ajax.Callsyncstart({
+                                                type: "GET",
+                                                url: sys.apiUrl("GBranch", "GetBranch"),
+                                                data: { CompCode: Number(compCode), BRA_CODE: Number(braCode) },
+                                                async: false,
+                                                success: function (d) {
+                                                    var res = d;
+                                                    if (res.IsSuccess) {
+                                                        G_BRANCHService = res.Response;
+                                                        if (G_BRANCHService != null) {
+                                                            SystemEnv.SlsInvType = G_BRANCHService[0].SlsInvType;
+                                                            SystemEnv.WholeInvoiceTransCode = G_BRANCHService[0].WholeInvoiceTransCode;
+                                                            SystemEnv.RetailInvoicePayment = G_BRANCHService[0].RetailInvoicePayment;
+                                                            SystemEnv.WholeInvoicePayment = G_BRANCHService[0].WholeInvoicePayment;
+                                                            SystemEnv.ServiceInvoiceTransCode = G_BRANCHService[0].ServiceInvoiceTransCode;
+                                                            SystemEnv.ReturnTypeCode = G_BRANCHService[0].ReturnTypeCode;
+                                                            SystemEnv.InvoiceTypeCode = G_BRANCHService[0].InvoiceTypeCode;
+                                                            SystemEnv.RetailInvoiceTransCode = G_BRANCHService[0].RetailInvoiceTransCode;
+                                                        }
+                                                        else {
+                                                            var msg = SystemEnv.ScreenLanguage == "ar" ? "غير مصرح لك الدخول الفرع" : "You are not allowed to login";
+                                                            MessageBox.Show(msg, "");
+                                                        }
+                                                    }
+                                                }
+                                            });
                                             document.cookie = "Inv1_systemProperties=" + JSON.stringify(SystemEnv).toString() + ";expires=Fri, 31 Dec 2030 23:59:59 GMT;path=/";
                                             OnLogged();
                                         }
